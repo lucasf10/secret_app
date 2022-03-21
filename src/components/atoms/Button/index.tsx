@@ -26,9 +26,9 @@ const Button = (props: Props): React.ReactElement => {
 
   return (
     <TouchableOpacity
-        style={customViewStyle}
-        onPress={onClick}
-        accessibilityLabel={accessibilityLabel}
+      style={customViewStyle}
+      onPress={onClick}
+      accessibilityLabel={accessibilityLabel}
     >
         <Text style={customTextStyle}>
             {title}
