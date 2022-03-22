@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
+import { PRIMARY, WHITE } from '../../../utils/colors';
 
 const style = StyleSheet.create({
     view: {
-        backgroundColor: '#545454',
+        backgroundColor: PRIMARY,
         justifyContent: 'center',
         width: '100%',
         alignItems: 'center',
         padding: 15,
     },
     text: {
-        color: '#ffffff',
+        color: WHITE,
         fontWeight: '700',
         fontSize: 18,
     },
