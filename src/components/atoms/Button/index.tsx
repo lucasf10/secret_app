@@ -30,9 +30,9 @@ const Button = (props: Props): React.ReactElement => {
       onPress={onClick}
       accessibilityLabel={accessibilityLabel}
     >
-        <Text style={customTextStyle}>
-            {title}
-        </Text>
+      <Text style={customTextStyle}>
+          {title}
+      </Text>
     </TouchableOpacity>
   );
 };

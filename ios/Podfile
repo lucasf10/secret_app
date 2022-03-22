@@ -12,6 +12,8 @@ target 'secret_app' do
     :hermes_enabled => false
   )
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'secret_appTests' do
     inherit! :complete
     # Pods for testing

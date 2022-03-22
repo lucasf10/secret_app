@@ -3,10 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import WelcomeScreen from '../scenes/welcome';
+import SignScreen from '../scenes/sign';
 
 export type RootStackParamList = {
   Welcome: undefined;
-  Sign: undefined;
+  Sign: {
+    type: 'signIn'|'signUp'
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -24,11 +27,11 @@ export const WelcomeStack = (): React.ReactElement => {
           component={WelcomeScreen}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Sign"
           component={SignScreen}
-          options={{ headerShown: true }}
-        /> */}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

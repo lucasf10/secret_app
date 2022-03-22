@@ -14,6 +14,11 @@ type Props = {
 };
 
 const WelcomeScreen = ({ navigation }: Props): React.ReactElement => {
+
+    const goToSignPage = (type: 'signIn'|'signUp') => {
+        navigation.navigate('Sign', { type });
+    };
+
     return (
         <View style={styles.container}>
             <Image source={Logo} style={styles.logo} />
@@ -27,14 +32,12 @@ const WelcomeScreen = ({ navigation }: Props): React.ReactElement => {
 
             <Button
                 accessibilityLabel="Sign Up"
-                onClick={() => console.log('Sign Up clicado')}
+                onClick={() => goToSignPage('signUp')}
                 title="Sign Up"
                 viewStyle={styles.signUpButton}
             />
 
-            <TouchableOpacity
-                onPress={() => console.log('Already have an account button pressed')}
-            >
+            <TouchableOpacity onPress={() => goToSignPage('signIn')}>
                 <Text style={styles.loginButton}>I already have an account</Text>
             </TouchableOpacity>
         </View>
