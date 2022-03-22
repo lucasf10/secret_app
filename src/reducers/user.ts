@@ -22,6 +22,11 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
         ...action.payload,
         isFetching: false,
       };
+    case types.ERROR:
+      return {
+        ...state,
+        isFetching: false,
+      };
     default:
       return state;
   }

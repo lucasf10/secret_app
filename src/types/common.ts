@@ -7,4 +7,9 @@ export interface Action {
 
 export interface State {
   user: UserState;
+  toast: ToastState;
+}
+
+export interface ToastState {
+  text: string;
 }

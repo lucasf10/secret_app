@@ -9,7 +9,10 @@ import styles from './style';
 import { Logo } from '../../assets/images';
 import Form from '../../components/organisms/Form';
 import { actions as userActions } from '../../actions/user';
-import { SignUpForm, SignInForm } from '../../utils/constants';
+import { actions as toast } from '../../actions/toast';
+import { SignUpForm, SignInForm, SignUpValidationSchema, SignInValidationSchema } from '../../utils/constants';
+import { UserForm } from '../../types/user';
+import { validateForm } from '../../utils/functions';
 
 type SignProp = NativeStackNavigationProp<RootStackParamList, 'Sign'>;
 type SignRouteProp = RouteProp<RootStackParamList, 'Sign'>;
@@ -19,16 +22,13 @@ type Props = {
   route: SignRouteProp;
 };
 
-const SignScreen = ({ navigation, route }: Props): React.ReactElement => {
+const SignScreen = ({ route }: Props): React.ReactElement => {
     const dispatch = useDispatch();
     const [values, setValues] = useState<Record<string, string | boolean>>({});
     const [type, setType] = useState<('signUp'|'signIn')>(route.params.type);
 
     const form = useMemo(() => (type === 'signUp' ? SignUpForm : SignInForm), [type]);
-
-    const onFormSubmit = () => {
-        dispatch(userActions.performAuth(values.username as string, values.password as string));
-    };
+    const validationSchema = useMemo(() => (type === 'signUp' ? SignUpValidationSchema : SignInValidationSchema), [type]);
 
     const switchForm = () => {
         const toType = (type === 'signUp') ? 'signIn' : 'signUp';
@@ -41,6 +41,19 @@ const SignScreen = ({ navigation, route }: Props): React.ReactElement => {
             ...values,
             [name]: value,
         });
+    };
+
+    const onFormSubmit = () => {
+        const validation = validateForm(values, validationSchema);
+        if (validation) {
+            dispatch(toast.setToast(validation));
+            dispatch(userActions.error());
+        } else {
+            if (type === 'signIn')
+                dispatch(userActions.performAuth(values.username as string, values.password as string));
+            else if (type === 'signUp')
+                dispatch(userActions.signUp(values as UserForm));
+        }
     };
 
     return (

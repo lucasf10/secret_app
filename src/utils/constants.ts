@@ -1,4 +1,7 @@
+import * as yup from 'yup';
 import { Field } from '../components/organisms/Form';
+
+export const TOAST_DURATION = 3000;
 
 export const SignUpForm: Field[] = [
   { placeholder: 'Username', name: 'username' },
@@ -23,3 +26,21 @@ export const SignInForm: Field[] = [
     type: 'password',
   },
 ];
+
+export const SignInValidationSchema = yup.object().shape({
+  username: yup.string().required('You must provide an username.'),
+  password: yup.string().required('You must provide a password.'),
+});
+
+export const SignUpValidationSchema = yup.object().shape({
+  username: yup.string().required('You must provide an username.'),
+  email: yup
+    .string()
+    .email('This is not a valid e-mail')
+    .required('You must provide an e-mail.'),
+  password: yup.string().required('You must provide a password.'),
+  passwordConfirmation: yup
+    .string()
+    .required('You must provide a password confirmation.')
+    .oneOf([yup.ref('password'), null], 'Your passwords don\'t match.'),
+});

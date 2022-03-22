@@ -24,5 +24,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'prettier/prettier': 0,
+    'curly': ['error', 'multi-or-nest'],
   },
 };
