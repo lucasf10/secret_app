@@ -26,7 +26,7 @@ const App = () => {
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      const message = error?.response?.data?.message as string;
+      const message = error?.response?.data?.error as string;
       toast?.show(message || 'Something went wrong.', TOAST_DURATION);
       return Promise.reject(error);
     },

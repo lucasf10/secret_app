@@ -27,7 +27,7 @@ const SignScreen = ({ route }: Props): React.ReactElement => {
     const [values, setValues] = useState<Record<string, string | boolean>>({});
     const [type, setType] = useState<('signUp'|'signIn')>(route.params.type);
 
-    const form = useMemo(() => (type === 'signUp' ? SignUpForm : SignInForm), [type]);
+    const formFields = useMemo(() => (type === 'signUp' ? SignUpForm : SignInForm), [type]);
     const validationSchema = useMemo(() => (type === 'signUp' ? SignUpValidationSchema : SignInValidationSchema), [type]);
 
     const switchForm = () => {
@@ -61,7 +61,7 @@ const SignScreen = ({ route }: Props): React.ReactElement => {
             <Image source={Logo} style={styles.logo} />
 
             <Form
-                fields={form}
+                fields={formFields}
                 onFormSubmit={onFormSubmit}
                 onValueChange={onValueChange}
                 submitLabel={`Sign ${type === 'signUp' ? 'Up' : 'In'}`}
