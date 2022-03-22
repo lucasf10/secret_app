@@ -10,7 +10,8 @@ export const validateForm = (
       return '';
     } catch (err) {
       const object = yupToObject(err);
-      const keys = Object.keys(object);
+      const originalKeys = Object.fromEntries(Object.entries(object).sort());
+      const keys = Object.keys(originalKeys);
       return object[keys[0]];
     }
 };
