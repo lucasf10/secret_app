@@ -1,9 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import styles from './style';
 import Input from '../../atoms/Input';
 import Button from '../../atoms/Button';
+import { State } from '../../../types/common';
+import Loader from '../../atoms/Loader';
 
 export interface Field {
   name: string;
@@ -22,6 +25,7 @@ export interface Props {
 
 const Form = (props: Props): React.ReactElement => {
   const { fields, onValueChange, values, onFormSubmit, submitLabel } = props;
+  const isLoading = useSelector((state: State) => state.user.isFetching);
 
   const renderField = (item: Field) => {
     return (
@@ -41,11 +45,13 @@ const Form = (props: Props): React.ReactElement => {
     <View style={styles.container}>
       {fields.map((item) => renderField(item))}
 
-      <Button
-        onClick={onFormSubmit}
-        title={submitLabel}
-        viewStyle={styles.sendButtonStyle}
-      />
+      { isLoading ? ( <Loader /> ) : (
+        <Button
+          onClick={onFormSubmit}
+          title={submitLabel}
+          viewStyle={styles.sendButtonStyle}
+        />
+      )}
     </View>
   );
 };

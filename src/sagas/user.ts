@@ -16,7 +16,6 @@ function* onPerformAuth(action: Action) {
 
     yield put(userActions.setLogged(true, data.token));
   } catch (e) {
-    // console.error(JSON.stringify(e));
     yield put(userActions.error());
   }
 }
@@ -26,18 +25,16 @@ function* onSignUp(action: Action) {
     const { payload } = action.payload!;
     const { data } = yield call(performSignUp, payload as UserForm);
 
-    yield put(userActions.setLogged(true, data.accessToken));
+    yield put(userActions.setLogged(true, data.token));
   } catch (e) {
-    // console.log(JSON.stringify(e));
     yield put(userActions.error());
   }
 }
 
 function* onSignOut() {
   try {
-    yield put(userActions.setLogged(false));
+    yield put(userActions.setLogged(false, undefined));
   } catch (e) {
-    // console.log(JSON.stringify(e));
     yield put(userActions.error());
   }
 }
