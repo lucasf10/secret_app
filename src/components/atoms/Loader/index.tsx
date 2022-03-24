@@ -4,11 +4,12 @@ import { PRIMARY } from '../../../utils/colors';
 
 export interface Props {
   style?: ViewStyle;
-  color?: ColorValue
+  color?: ColorValue;
+  size?: number | 'small' | 'large';
 }
 
-const Loader = ({ style, color }: Props): React.ReactElement => {
-  return <ActivityIndicator style={style} size="large" color={color || PRIMARY} />;
+const Loader = ({ style, color, size }: Props): React.ReactElement => {
+  return <ActivityIndicator style={style} size={size || 'large'} color={color || PRIMARY} />;
 };
 
 export default Loader;
