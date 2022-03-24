@@ -14,6 +14,8 @@ target 'secret_app' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'react-native-location', :path => '../node_modules/react-native-location'
+
   target 'secret_appTests' do
     inherit! :complete
     # Pods for testing
