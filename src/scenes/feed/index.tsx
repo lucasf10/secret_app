@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { RefreshControl, Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LoggedStackParamList } from '../../navigation/LoggedStack';
 
@@ -8,8 +7,8 @@ import { LoggedStackParamList } from '../../navigation/LoggedStack';
 import HeaderFeed from '../../components/organisms/HeaderFeed';
 import Post from '../../components/organisms/Post';
 import { FlatList } from 'react-native-gesture-handler';
-import Button from '../../components/atoms/Button';
-import { PRIMARY } from '../../utils/colors';
+import { PRIMARY, BLACK } from '../../utils/colors';
+import EmptyFeed from '../../components/molecule/EmptyFeed';
 
 type FeedProp = NativeStackNavigationProp<LoggedStackParamList, 'Feed'>;
 
@@ -17,13 +16,19 @@ type Props = {
     navigation: FeedProp;
 };
 
-const FeedScreen = ({ navigation }: Props): React.ReactElement => {
+const FeedScreen = ({ }: Props): React.ReactElement => {
     const [isRefreshing, setIsRefreshing] = useState(false);
 
     const posts: number[] = [1, 2, 3, 4, 5];
 
     const renderPosts = () => {
-        return <Post />;
+        return (
+            <Post
+                text="Peter Parker é o Homem-Aranha. &apos;0&apos;"
+                color={BLACK}
+                isLiked={true}
+            />
+        );
     };
 
     const wait = (timeout: number) => {
@@ -36,6 +41,15 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
         wait(2000).then(() => setIsRefreshing(false));
     };
 
+    const refreshControl: React.ReactElement = (
+        <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor={PRIMARY}
+            colors={[PRIMARY]}
+        />
+    );
+
     return (
         <View>
             <HeaderFeed />
@@ -43,31 +57,10 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
                 <FlatList
                     data={posts}
                     renderItem={renderPosts}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={isRefreshing}
-                            onRefresh={onRefresh}
-                            tintColor={PRIMARY}
-                            colors={[PRIMARY]}
-                        />
-                    }
+                    refreshControl={refreshControl}
                     keyExtractor={item => item.toString()}
                 />
-            ) : (
-                // EmptyFeed Component
-                <View style={{
-                    marginTop: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                    <Text style={{ fontSize: 16 }}>Nobody has shared a secret in your town yet.</Text>
-                    <Button
-                        title={'Click here to be the first one!'}
-                        onClick={() => console.log('Pressed button')}
-                        viewStyle={{ marginTop: 20, width: '82%' }}
-                    />
-                </View>
-            )}
+            ) : ( <EmptyFeed /> )}
         </View>
     );
 };

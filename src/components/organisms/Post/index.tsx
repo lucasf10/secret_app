@@ -1,62 +1,28 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ColorValue, View } from 'react-native';
 
-// import styles from './style';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as faEmptyHeart, faComment } from '@fortawesome/free-regular-svg-icons';
-import { PRIMARY, WHITE } from '../../../utils/colors';
+import styles from './style';
+import PostFooter from '../../molecule/PostFooter';
+import PostContent from '../../atoms/PostContent';
 
-// type Props = {
+type Props = {
+    color: ColorValue,
+    text: string;
+    isLiked: boolean;
+};
 
-// };
+const Post = ({ color, text, isLiked }: Props): React.ReactElement => {
+    const [liked, setLiked] = useState<boolean>(isLiked);
 
-const Post = (): React.ReactElement => {
-    const [liked, setLiked] = useState<boolean>(false);
+    const viewStyle = {
+        ...styles.view,
+        backgroundColor: color,
+    }
 
     return (
-        <View style={{
-            backgroundColor: '#000000',
-            borderBottomWidth: 3,
-            borderBottomColor: PRIMARY,
-        }}>
-
-            {/* PostContent Component */}
-
-            <View style={{
-                width: '100%',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 300,
-                paddingHorizontal: 20,
-            }}>
-                <Text style={{
-                    textAlign: 'center',
-                    color: '#ffffff',
-                    fontSize: 22,
-                    fontWeight: 'bold',
-                    marginTop: 40,
-                }}>Peter Parker é o Homem-Aranha. &apos;0&apos;</Text>
-            </View>
-
-            {/* FooterPost Component */}
-
-            <View style={{
-                width:'100%',
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-                alignItems: 'center',
-                padding: 12,
-            }}>
-                <TouchableOpacity onPress={() => console.log('Pressed comment icon')} >
-                    <FontAwesomeIcon icon={faComment} color={WHITE} size={22} />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{marginLeft: 12}} onPress={() => setLiked(!liked)}>
-                    <FontAwesomeIcon icon={liked ? faHeart : faEmptyHeart } color={WHITE} size={22} />
-                </TouchableOpacity>
-            </View>
+        <View style={viewStyle}>
+            <PostContent text={text} />
+            <PostFooter onLiked={() => setLiked(!liked)} like={liked} />
         </View>
     );
 };
