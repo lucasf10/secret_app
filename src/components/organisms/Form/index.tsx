@@ -45,7 +45,9 @@ const Form = (props: Props): React.ReactElement => {
     <View style={styles.container}>
       {fields.map((item) => renderField(item))}
 
-      { isLoading ? ( <Loader /> ) : (
+      { isLoading ? (
+        <Loader style={styles.loading}/>
+      ) : (
         <Button
           onClick={onFormSubmit}
           title={submitLabel}

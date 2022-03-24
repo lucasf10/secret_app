@@ -15,13 +15,13 @@ const Button = (props: Props): React.ReactElement => {
   const { title, textStyle, viewStyle, accessibilityLabel, onClick } = props;
 
   const customViewStyle = {
-    ...viewStyle || {},
     ...styles.view,
+    ...viewStyle || {},
   };
 
   const customTextStyle = {
-    ...textStyle || {},
     ...styles.text,
+    ...textStyle || {},
   };
 
   return (

@@ -1,15 +1,14 @@
-import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+/* eslint-disable react-native/no-inline-styles */
+import React, { useState } from 'react';
+import { RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LoggedStackParamList } from '../../navigation/LoggedStack';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faPenToSquare, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './style';
-import { Logo } from '../../assets/images';
+// import styles from './style';
+import HeaderFeed from '../../components/organisms/HeaderFeed';
+import Post from '../../components/organisms/Post';
+import { FlatList } from 'react-native-gesture-handler';
 import Button from '../../components/atoms/Button';
-import { actions as userActions} from '../../actions/user';
 import { PRIMARY } from '../../utils/colors';
 
 type FeedProp = NativeStackNavigationProp<LoggedStackParamList, 'Feed'>;
@@ -18,31 +17,57 @@ type Props = {
     navigation: FeedProp;
 };
 
-const renderHeader = (LogOut: () => void): React.ReactElement => {
-    return (
-        <View style={styles.headerView}>
-            <TouchableOpacity onPress={LogOut}>
-                <FontAwesomeIcon icon={faRightFromBracket} color={PRIMARY} size={22} />
-            </TouchableOpacity>
-
-            <Image resizeMode="contain" source={Logo} style={styles.logo} />
-
-            <TouchableOpacity onPress={() => console.log('Pressed')}>
-                <FontAwesomeIcon icon={faPenToSquare} color={PRIMARY} size={22} />
-            </TouchableOpacity>
-        </View>
-    );
-};
-
 const FeedScreen = ({ navigation }: Props): React.ReactElement => {
-    const dispatch = useDispatch();
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
-    const LogOut = () => dispatch(userActions.signOut());
+    const posts: number[] = [1, 2, 3, 4, 5];
+
+    const renderPosts = () => {
+        return <Post />;
+    };
+
+    const wait = (timeout: number) => {
+        return new Promise(resolve => setTimeout(resolve, timeout));
+    };
+
+    const onRefresh = () => {
+        // Boiler plate to check functionality
+        setIsRefreshing(true);
+        wait(2000).then(() => setIsRefreshing(false));
+    };
 
     return (
         <View>
-            {renderHeader(LogOut)}
-            <Text style={{textAlign: 'center'}}>Feed</Text>
+            <HeaderFeed />
+            {posts && posts.length > 0 ? (
+                <FlatList
+                    data={posts}
+                    renderItem={renderPosts}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isRefreshing}
+                            onRefresh={onRefresh}
+                            tintColor={PRIMARY}
+                            colors={[PRIMARY]}
+                        />
+                    }
+                    keyExtractor={item => item.toString()}
+                />
+            ) : (
+                // EmptyFeed Component
+                <View style={{
+                    marginTop: 20,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <Text style={{ fontSize: 16 }}>Nobody has shared a secret in your town yet.</Text>
+                    <Button
+                        title={'Click here to be the first one!'}
+                        onClick={() => console.log('Pressed button')}
+                        viewStyle={{ marginTop: 20, width: '82%' }}
+                    />
+                </View>
+            )}
         </View>
     );
 };

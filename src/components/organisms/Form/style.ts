@@ -13,6 +13,9 @@ const style = StyleSheet.create({
   sendButtonStyle: {
     marginBottom: 20,
   },
+  loading: {
+    marginBottom: 10,
+  },
 });
 
 export default style;
