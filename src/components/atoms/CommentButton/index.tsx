@@ -19,7 +19,7 @@ const CommentButton = ({ onClickCommentButton, color, size, style }: Props): Rea
             <FontAwesomeIcon
                 icon={faComment}
                 color={color || WHITE}
-                size={size || 22}
+                size={size || 24}
             />
         </TouchableOpacity>
     );

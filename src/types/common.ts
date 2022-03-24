@@ -1,3 +1,4 @@
+import { PostState } from './post';
 import { UserState } from './user';
 
 export interface Action {
@@ -8,6 +9,7 @@ export interface Action {
 export interface State {
   user: UserState;
   toast: ToastState;
+  post: PostState;
 }
 
 export interface ToastState {

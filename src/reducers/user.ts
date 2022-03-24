@@ -17,6 +17,8 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
         isFetching: true,
       };
     case types.SET_LOGGED:
+    case types.SET_USER_DATA:
+    case types.SET_ACCESS_TOKEN:
       return {
         ...state,
         ...action.payload,

@@ -3,7 +3,7 @@ import { types, actions as userActions } from '../actions/user';
 import { performAuth, performSignUp } from '../services/users';
 import api from '../services/api';
 import { Action } from '../types/common';
-import { UserForm } from '../types/user';
+import { User, UserForm } from '../types/user';
 
 function* onPerformAuth(action: Action) {
   try {
@@ -13,7 +13,8 @@ function* onPerformAuth(action: Action) {
       email as string,
       password as string,
     );
-
+    yield put(userActions.setUserData(data.user as User));
+    yield put(userActions.setAccessToken(data.token));
     yield put(userActions.setLogged(true, data.token));
   } catch (e) {
     yield put(userActions.error());

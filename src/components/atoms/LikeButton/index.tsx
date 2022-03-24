@@ -21,7 +21,7 @@ const LikeButton = ({ onLiked, liked, size, color, style }: Props): React.ReactE
             <FontAwesomeIcon
                 icon={liked ? faHeart : faEmptyHeart }
                 color={color || WHITE}
-                size={size || 22}
+                size={size || 24}
             />
         </TouchableOpacity>
     );
