@@ -10,6 +10,7 @@ export interface User {
   id: number;
   username: string;
   email: string;
+  likedPosts: string[];
 }
 
 export interface UserForm {

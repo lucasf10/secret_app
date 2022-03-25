@@ -30,6 +30,7 @@ interface Post {
 }
 
 const FeedScreen = ({ }: Props): React.ReactElement => {
+    const user = useSelector((state: State) => state.user.user);
     const posts = useSelector((state: State) => state.post.posts);
     const isFetching = useSelector((state: State) => state.post.isFetching);
     const [isRefreshing, setIsRefreshing] = useState(false);
@@ -46,11 +47,13 @@ const FeedScreen = ({ }: Props): React.ReactElement => {
     }, [loadData]);
 
     const renderPosts = ({ item }: { item: PostType }) => {
+        const isPostLiked = (user?.likedPosts && user?.likedPosts.indexOf(item._id) > -1) || false;
         return (
             <Post
                 text={item.text}
                 color={item.colorCode!}
-                isLiked={item.liked || false}
+                isLiked={isPostLiked}
+                onLiked={() => dispatch(postActions.likePost(item._id, isPostLiked))}
             />
         );
     };

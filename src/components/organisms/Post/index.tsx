@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ColorValue, View } from 'react-native';
 
 import styles from './style';
@@ -9,20 +9,19 @@ type Props = {
     color: ColorValue,
     text: string;
     isLiked: boolean;
+    onLiked: () => void;
 };
 
-const Post = ({ color, text, isLiked }: Props): React.ReactElement => {
-    const [liked, setLiked] = useState<boolean>(isLiked);
-
+const Post = ({ color, text, isLiked, onLiked }: Props): React.ReactElement => {
     const viewStyle = {
         ...styles.view,
         backgroundColor: color,
-    }
+    };
 
     return (
         <View style={viewStyle}>
             <PostContent text={text} />
-            <PostFooter onLiked={() => setLiked(!liked)} like={liked} />
+            <PostFooter onLiked={onLiked} like={isLiked} />
         </View>
     );
 };

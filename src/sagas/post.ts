@@ -1,6 +1,6 @@
 import { call, put, takeEvery, ForkEffect, select } from 'redux-saga/effects';
 import { types, actions as postActions } from '../actions/post';
-import { getPosts } from '../services/posts';
+import { getPosts, likePost, dislikePost } from '../services/posts';
 import { Action, State } from '../types/common';
 import { Post } from '../types/post';
 
@@ -22,10 +22,23 @@ function* onGetPosts(action: Action) {
   }
 }
 
+function* onLikedPost(action: Action) {
+  try {
+    const { postId, isDislike } = action.payload!;
+    console.log({ postId, isDislike });
+    const endpoint = isDislike ? dislikePost : likePost;
+
+    yield call(endpoint, postId as string);
+  } catch (e) {
+    yield put(postActions.error());
+  }
+}
+
 export default function* watchUser(): Generator<
   ForkEffect<never>,
   void,
   unknown
 > {
   yield takeEvery(types.GET_POSTS, onGetPosts);
+  yield takeEvery(types.LIKE_POST, onLikedPost);
 }

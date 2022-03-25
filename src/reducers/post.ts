@@ -20,6 +20,11 @@ const postState = (state = INITIAL_STATE, action: Action): PostState => {
         ...action.payload,
         isFetching: false,
       };
+    case types.LIKE_POST:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case types.ERROR:
         return {
             ...state,
