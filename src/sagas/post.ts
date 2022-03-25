@@ -1,18 +1,23 @@
-import { call, put, takeEvery, ForkEffect } from 'redux-saga/effects';
+import { call, put, takeEvery, ForkEffect, select } from 'redux-saga/effects';
 import { types, actions as postActions } from '../actions/post';
 import { getPosts } from '../services/posts';
-import { Action } from '../types/common';
+import { Action, State } from '../types/common';
+import { Post } from '../types/post';
 
 function* onGetPosts(action: Action) {
   try {
-    const { city } = action.payload!;
-    const { data } = yield call(getPosts);
+    const { city, limit, offset, fromStart } = action.payload!;
+    const { data } = yield call(
+        getPosts,
+        limit as number,
+        offset as number,
+        city as string,
+    );
 
-    // console.log(data);
-
-    yield put(postActions.setPosts(data.posts));
+    const currentPosts: Post[] = yield select((state: State) => state.post.posts);
+    const posts = fromStart ? data.posts : [...currentPosts, ...data.posts];
+    yield put(postActions.setPosts(posts));
   } catch (e) {
-      console.log(e);
     yield put(postActions.error());
   }
 }

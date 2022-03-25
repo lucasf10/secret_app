@@ -3,6 +3,8 @@ import { Field } from '../components/organisms/Form';
 
 export const TOAST_DURATION = 3000;
 
+export const POST_LIMIT_PER_REQUEST = 10;
+
 export const SignUpForm: Field[] = [
   { placeholder: 'Username', name: 'username' },
   { placeholder: 'E-mail', name: 'email' },

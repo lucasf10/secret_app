@@ -15,11 +15,6 @@ const postState = (state = INITIAL_STATE, action: Action): PostState => {
         isFetching: true,
       };
     case types.SET_POSTS:
-      console.log({
-        ...state,
-        ...action.payload,
-        isFetching: false,
-      });
       return {
         ...state,
         ...action.payload,

@@ -6,7 +6,7 @@ export interface PostState {
 }
 
 export interface Post {
-    id: string,
+    _id: string,
     text: string,
     city?: string,
     colorCode?: ColorValue,

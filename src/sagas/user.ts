@@ -1,5 +1,6 @@
 import { call, put, takeEvery, ForkEffect } from 'redux-saga/effects';
 import { types, actions as userActions } from '../actions/user';
+import { actions as postActions } from '../actions/post';
 import { performAuth, performSignUp } from '../services/users';
 import api from '../services/api';
 import { Action } from '../types/common';
@@ -35,6 +36,7 @@ function* onSignUp(action: Action) {
 function* onSignOut() {
   try {
     yield put(userActions.setLogged(false, undefined));
+    yield put(postActions.setPosts([]));
   } catch (e) {
     yield put(userActions.error());
   }

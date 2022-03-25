@@ -10,12 +10,12 @@ export const types = {
 };
 
 export const actions = {
-  getPosts: (city: string): Action => ({
+  getPosts: (city: string, limit: number, offset: number, fromStart: boolean): Action => ({
     type: types.GET_POSTS,
-    payload: { city },
+    payload: { city, limit, offset, fromStart },
   }),
   setPosts: (posts: Post[]): Action => ({
-    type: types.GET_POSTS,
+    type: types.SET_POSTS,
     payload: { posts },
   }),
   error: (): Action => ({
