@@ -9,8 +9,10 @@ import { LoggedStack } from './navigation/LoggedStack';
 import { TOAST_DURATION } from './utils/constants';
 import { store, persistor } from './store';
 import api from './services/api';
+import { actions as userActions } from './actions/user';
 
 const App = () => {
+  const { dispatch } = store;
   const [loggedIn, setLoggedIn] = useState(store.getState().user.isLoggedIn);
   const [toast, setToast] = useState<any>();
 
@@ -23,10 +25,19 @@ const App = () => {
     if (toastText) toast?.show(toastText, TOAST_DURATION);
   });
 
+  if (!api.defaults.headers.common.Authorization && loggedIn)
+    api.defaults.headers.common.Authorization = `Bearer ${store.getState().user.accessToken}`;
+
   api.interceptors.response.use(
     (response) => response,
     (error) => {
-      const message = error?.response?.data?.error as string;
+      let message = error?.response?.data?.error as string;
+
+      if (error?.response?.status === 401) {
+        message = 'Your login has expired.';
+        dispatch(userActions.signOut());
+      }
+
       toast?.show(message || 'Something went wrong.', TOAST_DURATION);
       return Promise.reject(error);
     },
