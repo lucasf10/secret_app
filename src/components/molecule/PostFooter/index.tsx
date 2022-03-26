@@ -6,17 +6,25 @@ import LikeButton from '../../atoms/LikeButton';
 import CommentButton from '../../atoms/CommentButton';
 
 type Props = {
+    onClickCommentButton: () => void;
     onLiked: () => void;
     like: boolean;
     likeCount: number;
     commentCount: number;
 };
 
-const PostFooter = ({ onLiked, like, likeCount,commentCount }: Props): React.ReactElement => {
+const PostFooter = (props: Props): React.ReactElement => {
+    const {
+        onClickCommentButton,
+        onLiked,
+        like,
+        likeCount,
+        commentCount,
+    } = props;
 
     return (
         <View style={style.view}>
-            <CommentButton count={commentCount} onClickCommentButton={() => console.log('Comment button pressed.')} />
+            <CommentButton count={commentCount} onClickCommentButton={onClickCommentButton} />
 
             <LikeButton onLiked={onLiked} liked={like} viewStyle={style.like} count={likeCount} />
         </View>

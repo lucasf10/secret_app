@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import WelcomeScreen from '../scenes/welcome';
 import SignScreen from '../scenes/sign';
+import { DefaultStackOptions } from '../utils/constants';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -25,12 +26,12 @@ export const WelcomeStack = (): React.ReactElement => {
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
-          options={{ headerShown: false }}
+          options={DefaultStackOptions}
         />
         <Stack.Screen
           name="Sign"
           component={SignScreen}
-          options={{ headerShown: false }}
+          options={DefaultStackOptions}
         />
       </Stack.Navigator>
     </NavigationContainer>

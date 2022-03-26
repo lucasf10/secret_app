@@ -16,7 +16,7 @@ import { actions as postActions } from '../../actions/post';
 import { State } from '../../types/common';
 import { POST_LIMIT_PER_REQUEST } from '../../utils/constants';
 
-type FeedProp = NativeStackNavigationProp<LoggedStackParamList, 'Feed'>;
+export type FeedProp = NativeStackNavigationProp<LoggedStackParamList, 'Feed'>;
 
 type Props = {
     navigation: FeedProp;
@@ -29,7 +29,7 @@ interface Post {
     liked: boolean;
 }
 
-const FeedScreen = ({ }: Props): React.ReactElement => {
+const FeedScreen = ({ navigation }: Props): React.ReactElement => {
     const user = useSelector((state: State) => state.user.user);
     const posts = useSelector((state: State) => state.post.posts);
     const isFetching = useSelector((state: State) => state.post.isFetching);
@@ -50,6 +50,7 @@ const FeedScreen = ({ }: Props): React.ReactElement => {
         const isPostLiked = (user?.likedPosts && user?.likedPosts.indexOf(item._id) > -1) || false;
         return (
             <Post
+                navigation={navigation}
                 text={item.text}
                 color={item.colorCode!}
                 isLiked={isPostLiked}

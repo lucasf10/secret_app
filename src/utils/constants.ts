@@ -5,6 +5,8 @@ export const TOAST_DURATION = 3000;
 
 export const POST_LIMIT_PER_REQUEST = 10;
 
+export const DefaultStackOptions = { headerShown: false };
+
 export const SignUpForm: Field[] = [
   { placeholder: 'Username', name: 'username' },
   { placeholder: 'E-mail', name: 'email' },

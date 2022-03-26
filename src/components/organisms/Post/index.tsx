@@ -4,9 +4,11 @@ import { ColorValue, View } from 'react-native';
 import styles from './style';
 import PostFooter from '../../molecule/PostFooter';
 import PostContent from '../../atoms/PostContent';
+import { FeedProp } from '../../../scenes/feed';
 
 type Props = {
-    color: ColorValue,
+    navigation: FeedProp;
+    color: ColorValue;
     text: string;
     isLiked: boolean;
     onLiked: () => void;
@@ -14,11 +16,23 @@ type Props = {
     commentCount: number;
 };
 
-const Post = ({ color, text, isLiked, onLiked, likeCount, commentCount }: Props): React.ReactElement => {
+const Post = (props: Props): React.ReactElement => {
+    const {
+        navigation,
+        color,
+        text,
+        isLiked,
+        onLiked,
+        likeCount,
+        commentCount,
+    } = props;
+
     const viewStyle = {
         ...styles.view,
         backgroundColor: color,
     };
+
+    const goToPostScreen = () => navigation.navigate('Post');
 
     return (
         <View style={viewStyle}>
@@ -28,6 +42,7 @@ const Post = ({ color, text, isLiked, onLiked, likeCount, commentCount }: Props)
                 like={isLiked}
                 likeCount={likeCount}
                 commentCount={commentCount}
+                onClickCommentButton={goToPostScreen}
             />
         </View>
     );
