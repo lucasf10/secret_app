@@ -54,6 +54,8 @@ const FeedScreen = ({ }: Props): React.ReactElement => {
                 color={item.colorCode!}
                 isLiked={isPostLiked}
                 onLiked={() => dispatch(postActions.likePost(item._id, isPostLiked))}
+                likeCount={item.likeAmount}
+                commentCount={item.comments.length}
             />
         );
     };

@@ -10,9 +10,11 @@ type Props = {
     text: string;
     isLiked: boolean;
     onLiked: () => void;
+    likeCount: number;
+    commentCount: number;
 };
 
-const Post = ({ color, text, isLiked, onLiked }: Props): React.ReactElement => {
+const Post = ({ color, text, isLiked, onLiked, likeCount, commentCount }: Props): React.ReactElement => {
     const viewStyle = {
         ...styles.view,
         backgroundColor: color,
@@ -20,8 +22,13 @@ const Post = ({ color, text, isLiked, onLiked }: Props): React.ReactElement => {
 
     return (
         <View style={viewStyle}>
-            <PostContent text={text} />
-            <PostFooter onLiked={onLiked} like={isLiked} />
+            <PostContent text={text}/>
+            <PostFooter
+                onLiked={onLiked}
+                like={isLiked}
+                likeCount={likeCount}
+                commentCount={commentCount}
+            />
         </View>
     );
 };

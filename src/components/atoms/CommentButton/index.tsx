@@ -1,26 +1,30 @@
 import React from 'react';
-import { TouchableOpacity, ViewStyle } from 'react-native';
+import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { WHITE } from '../../../utils/colors';
+import styles from './style';
 
 type Props = {
     onClickCommentButton: () => void;
     color?: string;
     size?: number;
-    style?: ViewStyle;
+    viewStyle?: ViewStyle;
+    textStyle?: TextStyle;
+    count: number;
 };
 
-const CommentButton = ({ onClickCommentButton, color, size, style }: Props): React.ReactElement => {
+const CommentButton = ({ onClickCommentButton, color, size, textStyle, viewStyle, count }: Props): React.ReactElement => {
 
     return (
-        <TouchableOpacity style={style} onPress={onClickCommentButton} >
+        <TouchableOpacity style={{...viewStyle, ...styles.view}} onPress={onClickCommentButton} >
             <FontAwesomeIcon
                 icon={faComment}
                 color={color || WHITE}
                 size={size || 24}
             />
+            { count > 0 && <Text style={{...textStyle, ...styles.text}}>{count}</Text>}
         </TouchableOpacity>
     );
 };

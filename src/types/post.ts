@@ -11,5 +11,6 @@ export interface Post {
     city?: string,
     colorCode?: ColorValue,
     createdAt?: Date,
-    liked?: boolean,
+    likeAmount: number,
+    comments: string[],
 }
