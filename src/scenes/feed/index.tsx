@@ -50,13 +50,13 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
         const isPostLiked = (user?.likedPosts && user?.likedPosts.indexOf(item._id) > -1) || false;
         return (
             <Post
-                navigation={navigation}
                 text={item.text}
                 color={item.colorCode!}
                 isLiked={isPostLiked}
                 onLiked={() => dispatch(postActions.likePost(item._id, isPostLiked))}
                 likeCount={item.likeAmount}
                 commentCount={item.comments.length}
+                onClickCommentButton={() => dispatch(postActions.openPostPage(item._id, navigation))}
             />
         );
     };

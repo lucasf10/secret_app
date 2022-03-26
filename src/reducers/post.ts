@@ -10,11 +10,13 @@ const INITIAL_STATE: PostState = {
 const postState = (state = INITIAL_STATE, action: Action): PostState => {
   switch (action.type) {
     case types.GET_POSTS:
+    case types.OPEN_POST_PAGE:
       return {
         ...state,
         isFetching: true,
       };
     case types.SET_POSTS:
+    case types.SET_CURRENT_POST:
       return {
         ...state,
         ...action.payload,

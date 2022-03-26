@@ -3,6 +3,7 @@ import { ColorValue } from 'react-native';
 export interface PostState {
     isFetching: boolean;
     posts: Post[]
+    currentPost?: Post;
 }
 
 export interface Post {
@@ -10,7 +11,6 @@ export interface Post {
     text: string,
     city?: string,
     colorCode?: ColorValue,
-    createdAt?: Date,
     likeAmount: number,
     comments: string[],
 }

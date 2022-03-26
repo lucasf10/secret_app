@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { WHITE } from '../../../utils/colors';
 import styles from './style';
 

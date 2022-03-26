@@ -1,7 +1,8 @@
 import { call, put, takeEvery, ForkEffect, select } from 'redux-saga/effects';
 import { types, actions as postActions } from '../actions/post';
 import { actions as userActions } from '../actions/user';
-import { getPosts, likePost, dislikePost } from '../services/posts';
+import { FeedProp } from '../scenes/feed';
+import { getPosts, getPostDetails, likePost, dislikePost } from '../services/posts';
 import { Action, State } from '../types/common';
 import { Post } from '../types/post';
 import { UserState } from '../types/user';
@@ -46,11 +47,31 @@ function* onLikedPost(action: Action) {
   }
 }
 
+function* onOpenPostPage(action: Action) {
+  const { postId, navigation } = action.payload!;
+  yield put(postActions.getPost(postId as string));
+  (navigation as FeedProp).navigate('Post');
+}
+
+function* onGetPostDetails(action: Action) {
+  try {
+    const { postId } = action.payload!;
+    if (postId) {
+      const { data } = yield call(getPostDetails, postId as string);
+      yield put(postActions.setCurrentPost(data.post as Post));
+    }
+  } catch (e) {
+    yield put(postActions.error());
+  }
+}
+
 export default function* watchUser(): Generator<
   ForkEffect<never>,
   void,
   unknown
 > {
+  yield takeEvery(types.GET_POST, onGetPostDetails);
   yield takeEvery(types.GET_POSTS, onGetPosts);
   yield takeEvery(types.LIKE_POST, onLikedPost);
+  yield takeEvery(types.OPEN_POST_PAGE, onOpenPostPage);
 }
