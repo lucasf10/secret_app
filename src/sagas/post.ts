@@ -41,6 +41,7 @@ function* onLikedPost(action: Action) {
       user.likedPosts.push(postId as string);
 
     yield put(userActions.setUserData(user));
+    yield put(postActions.getPost(postId as string));
     yield put(postActions.getPosts('', currentPosts.length, 0, true));
   } catch (e) {
     yield put(postActions.error());

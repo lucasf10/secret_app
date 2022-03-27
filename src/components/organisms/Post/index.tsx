@@ -12,7 +12,7 @@ type Props = {
     onLiked: () => void;
     likeCount: number;
     commentCount: number;
-    onClickCommentButton: () => void;
+    onClickCommentButton?: () => void;
 };
 
 const Post = (props: Props): React.ReactElement => {

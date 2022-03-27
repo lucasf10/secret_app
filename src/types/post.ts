@@ -1,4 +1,5 @@
 import { ColorValue } from 'react-native';
+import { Comment } from './comment';
 
 export interface PostState {
     isFetching: boolean;
@@ -12,5 +13,6 @@ export interface Post {
     city?: string,
     colorCode?: ColorValue,
     likeAmount: number,
-    comments: string[],
+    comments: Comment[] | string[],
+    likedByUser: boolean,
 }

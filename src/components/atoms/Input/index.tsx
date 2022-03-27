@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewStyle, TextInput, StyleProp } from 'react-native';
+import { TextInput, StyleProp, TextStyle } from 'react-native';
 
 import styles from './style';
 
@@ -9,7 +9,7 @@ export interface Props {
   defaultValue?: string;
   editable?: boolean;
   onChange?: (value: string) => void;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
   secureTextEntry?: boolean;
   placeholderTextColor?: string;
   onBlur?: () => void;

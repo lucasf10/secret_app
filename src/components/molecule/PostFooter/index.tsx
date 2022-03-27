@@ -1,16 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 
 import style from './style';
 import LikeButton from '../../atoms/LikeButton';
 import CommentButton from '../../atoms/CommentButton';
 
 type Props = {
-    onClickCommentButton: () => void;
+    onClickCommentButton?: () => void;
     onLiked: () => void;
     like: boolean;
     likeCount: number;
     commentCount: number;
+    likeStyle?: ViewStyle;
 };
 
 const PostFooter = (props: Props): React.ReactElement => {
@@ -20,13 +21,22 @@ const PostFooter = (props: Props): React.ReactElement => {
         like,
         likeCount,
         commentCount,
+        likeStyle,
     } = props;
 
     return (
         <View style={style.view}>
-            <CommentButton count={commentCount} onClickCommentButton={onClickCommentButton} />
+            <CommentButton
+                count={commentCount}
+                onClickCommentButton={onClickCommentButton}
+            />
 
-            <LikeButton onLiked={onLiked} liked={like} viewStyle={style.like} count={likeCount} />
+            <LikeButton
+                onLiked={onLiked}
+                liked={like}
+                viewStyle={{...style.like, ...likeStyle}}
+                count={likeCount}
+            />
         </View>
     );
 };

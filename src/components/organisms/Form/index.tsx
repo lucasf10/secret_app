@@ -19,7 +19,7 @@ export interface Props {
   fields: Array<Field>;
   values: Record<string, any>;
   submitLabel: string;
-  onValueChange: (name: string, value: string | boolean) => void;
+  onValueChange: ((name: string, value: string | boolean) => void) | ((value: string) => void);
   onFormSubmit: () => void;
 }
 

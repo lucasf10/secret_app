@@ -23,7 +23,7 @@ const LikeButton = ({ onLiked, liked, size, color, viewStyle, textStyle, count }
             <FontAwesomeIcon
                 icon={liked ? faHeart : faEmptyHeart }
                 color={color || WHITE}
-                size={size || 24}
+                size={size || 22}
             />
             { count > 0 && <Text style={{...textStyle, ...styles.text}}>{count}</Text>}
         </TouchableOpacity>

@@ -7,7 +7,7 @@ import { WHITE } from '../../../utils/colors';
 import styles from './style';
 
 type Props = {
-    onClickCommentButton: () => void;
+    onClickCommentButton?: () => void;
     color?: string;
     size?: number;
     viewStyle?: ViewStyle;
@@ -22,7 +22,7 @@ const CommentButton = ({ onClickCommentButton, color, size, textStyle, viewStyle
             <FontAwesomeIcon
                 icon={faComment}
                 color={color || WHITE}
-                size={size || 24}
+                size={size || 22}
             />
             { count > 0 && <Text style={{...textStyle, ...styles.text}}>{count}</Text>}
         </TouchableOpacity>

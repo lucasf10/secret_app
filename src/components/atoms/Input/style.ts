@@ -4,7 +4,7 @@ import { LIGHT_GREY, PRIMARY } from '../../../utils/colors';
 const style = StyleSheet.create({
   container: {
     width: '100%',
-    height: 55,
+    minHeight: 55,
     borderWidth: 1,
     borderColor: LIGHT_GREY,
     paddingLeft: 30,

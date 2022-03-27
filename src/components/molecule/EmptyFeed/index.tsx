@@ -14,7 +14,7 @@ const EmptyFeed = (): React.ReactElement => {
                 viewStyle={styles.button}
             />
         </View>
-    )
+    );
 };
 
 export default EmptyFeed;
