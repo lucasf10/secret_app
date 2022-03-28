@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useMemo, useState } from 'react';
-import { FlatList, RefreshControl, Text, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LoggedStackParamList } from '../../navigation/LoggedStack';
@@ -10,11 +10,15 @@ import { State } from '../../types/common';
 import Post from '../../components/organisms/Post';
 import { BLACK, DARK_GREY, GREY, LIGHT_GREY, PRIMARY, withOpacity } from '../../utils/colors';
 import { actions as postActions } from '../../actions/post';
+import { actions as commentActions } from '../../actions/comment';
 import { Comment } from '../../types/comment';
 import EmptyComments from '../../components/atoms/EmptyComments';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
 import CloseButton from '../../components/atoms/CloseButton';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import Loader from '../../components/atoms/Loader';
 
 export type PostProp = NativeStackNavigationProp<LoggedStackParamList, 'Post'>;
 
@@ -30,6 +34,7 @@ type renderItemProps = {
 const PostScreen = ({ navigation }: Props): React.ReactElement => {
     const dispatch = useDispatch();
     const post = useSelector((state: State) => state.post.currentPost)!;
+    const isFetching = useSelector((state: State) => state.comment.isFetching);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [newComment, setNewComment] = useState<string|undefined>(undefined);
 
@@ -40,6 +45,9 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
     const renderComment = ({ item, index }: renderItemProps) => {
         return (
             <View style={{
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
                 padding: 15,
                 ...(index > 0) ? { borderTopWidth: 1, borderTopColor: withOpacity(GREY, '99') } : {},
             }}>
@@ -48,7 +56,15 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
                     fontSize: 18,
                 }}>{item.text}</Text>
 
-                { }
+                {item.createdByUser && (
+                    <TouchableOpacity onPress={() => onDeleteComment(item._id)}>
+                        <FontAwesomeIcon
+                            icon={faTrashCan}
+                            color={PRIMARY}
+                            size={18}
+                        />
+                    </TouchableOpacity>
+                )}
             </View>
         );
     };
@@ -68,11 +84,15 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
         />
     );
 
-    const onSendComment = () => {
-        console.log(`newComment: ${newComment}`);
-        // commentActions.addComment(newComment, postId)
+    const onSendComment = useCallback(() => {
+        if (newComment && newComment !== '')
+            dispatch(commentActions.createComment(post?._id, newComment));
         setNewComment(undefined);
-    };
+    }, [post, dispatch, newComment]);
+
+    const onDeleteComment = useCallback((commentId: string) => {
+        dispatch(commentActions.deleteComment(commentId, post?._id));
+    }, [post, dispatch]);
 
     return (
         <View style={{height: '100%'}}>
@@ -89,13 +109,15 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
             {/* Comments Component */}
 
             <View style={{height: '100%', flex: 1}}>
-                <FlatList
-                    data={post?.comments as Comment[]}
-                    keyExtractor={(item: Comment) => item._id}
-                    renderItem={renderComment}
-                    refreshControl={refreshControl}
-                    ListEmptyComponent={EmptyComments}
-                />
+                {isFetching ? (<Loader style={{ flex: 1, marginVertical: 12 }} size={26} />) : (
+                    <FlatList
+                        data={post?.comments as Comment[]}
+                        keyExtractor={(item: Comment) => item._id}
+                        renderItem={renderComment}
+                        refreshControl={refreshControl}
+                        ListEmptyComponent={EmptyComments}
+                    />
+                )}
 
                 {/* Add comment component */}
 
@@ -113,7 +135,8 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
                             paddingLeft: 15,
                             fontSize: 16,
                         }}
-                        onChange={(value: string) => setNewComment(value)}
+                        value={newComment}
+                        onChange={(value: string) => { setNewComment(value); }}
                     />
                     <Button
                         viewStyle={{
@@ -124,6 +147,7 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
                             fontSize: 18,
                             color: PRIMARY,
                         }}
+                        disabled={(!newComment || newComment === '') || false}
                         title="Send"
                         onClick={onSendComment}
                     />

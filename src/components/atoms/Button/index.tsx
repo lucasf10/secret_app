@@ -8,11 +8,19 @@ export interface Props {
   textStyle?: TextStyle;
   viewStyle?: ViewStyle;
   accessibilityLabel?: string;
+  disabled?: boolean;
   onClick: () => void;
 }
 
 const Button = (props: Props): React.ReactElement => {
-  const { title, textStyle, viewStyle, accessibilityLabel, onClick } = props;
+  const {
+    title,
+    textStyle,
+    viewStyle,
+    accessibilityLabel,
+    disabled,
+    onClick,
+  } = props;
 
   const customViewStyle = {
     ...styles.view,
@@ -29,6 +37,7 @@ const Button = (props: Props): React.ReactElement => {
       style={customViewStyle}
       onPress={onClick}
       accessibilityLabel={accessibilityLabel}
+      disabled={disabled}
     >
       <Text style={customTextStyle}>
           {title}

@@ -30,7 +30,6 @@ interface Post {
 }
 
 const FeedScreen = ({ navigation }: Props): React.ReactElement => {
-    const user = useSelector((state: State) => state.user.user);
     const posts = useSelector((state: State) => state.post.posts);
     const isFetching = useSelector((state: State) => state.post.isFetching);
     const [isRefreshing, setIsRefreshing] = useState(false);
