@@ -2,8 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
     view: {
-        height: '100%',
+        flexDirection: 'row',
     },
+    like: {
+        marginLeft: 8,
+    }
 });
 
 export default style;

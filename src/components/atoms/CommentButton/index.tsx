@@ -18,7 +18,11 @@ type Props = {
 const CommentButton = ({ onClickCommentButton, color, size, textStyle, viewStyle, count }: Props): React.ReactElement => {
 
     return (
-        <TouchableOpacity style={{...viewStyle, ...styles.view}} onPress={onClickCommentButton} >
+        <TouchableOpacity
+            style={{...viewStyle, ...styles.view}}
+            onPress={onClickCommentButton}
+            disabled={!onClickCommentButton}
+        >
             <FontAwesomeIcon
                 icon={faComment}
                 color={color || WHITE}
