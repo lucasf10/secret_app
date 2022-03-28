@@ -10,6 +10,7 @@ const commentState = (state = INITIAL_STATE, action: Action): CommentState => {
   switch (action.type) {
     case types.CREATE_COMMENT:
     case types.DELETE_COMMENT:
+    case types.LIKE_COMMENT:
       return {
         ...state,
         isFetching: true,

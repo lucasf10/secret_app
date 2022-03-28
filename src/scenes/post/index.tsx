@@ -36,7 +36,6 @@ type renderItemProps = {
 const PostScreen = ({ navigation }: Props): React.ReactElement => {
     const dispatch = useDispatch();
     const post = useSelector((state: State) => state.post.currentPost)!;
-    const isFetching = useSelector((state: State) => state.comment.isFetching);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [newComment, setNewComment] = useState<string|undefined>(undefined);
 
@@ -45,7 +44,6 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
     }, [post, dispatch]);
 
     const renderComment = ({ item, index }: renderItemProps) => {
-        console.log(item);
         return (
             <View style={{
                 justifyContent: 'space-between',
@@ -77,8 +75,8 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
                         </TouchableOpacity>
                     )}
                     <LikeButton
-                        onLiked={() => console.log('Liked button pressed!')}
-                        liked={false}
+                        onLiked={() => onLikeComment(item._id, item.likedByUser)}
+                        liked={item.likedByUser}
                         count={0}
                         size={22}
                         color={PRIMARY}
@@ -114,6 +112,10 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
         dispatch(commentActions.deleteComment(commentId, post?._id));
     }, [post, dispatch]);
 
+    const onLikeComment = useCallback((commentId: string, isDislike: boolean) => {
+        dispatch(commentActions.likeComment(post?._id, commentId, isDislike));
+    }, [post, dispatch]);
+
     return (
         <View style={{height: '100%'}}>
             <CloseButton navigation={navigation}/>
@@ -129,15 +131,13 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
             {/* Comments Component */}
 
             <View style={{height: '100%', flex: 1}}>
-                {isFetching ? (<Loader style={{ flex: 1, marginVertical: 12 }} size={26} />) : (
-                    <FlatList
-                        data={post?.comments as Comment[]}
-                        keyExtractor={(item: Comment) => item._id}
-                        renderItem={renderComment}
-                        refreshControl={refreshControl}
-                        ListEmptyComponent={EmptyComments}
-                    />
-                )}
+                <FlatList
+                    data={post?.comments as Comment[]}
+                    keyExtractor={(item: Comment) => item._id}
+                    renderItem={renderComment}
+                    refreshControl={refreshControl}
+                    ListEmptyComponent={EmptyComments}
+                />
 
                 {/* Add comment component */}
 
