@@ -4,5 +4,8 @@ export interface CommentState {
 export interface Comment {
     _id: string,
     text: string,
-    createdByUser?: boolean;
+    createdByUser: boolean;
+    createdAt: Date;
+    likedByUser: boolean;
+    likeAmount: number;
 }

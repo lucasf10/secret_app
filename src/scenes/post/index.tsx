@@ -19,6 +19,8 @@ import CloseButton from '../../components/atoms/CloseButton';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import Loader from '../../components/atoms/Loader';
+import { getRelativeTime } from '../../utils/functions';
+import LikeButton from '../../components/atoms/LikeButton';
 
 export type PostProp = NativeStackNavigationProp<LoggedStackParamList, 'Post'>;
 
@@ -43,6 +45,7 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
     }, [post, dispatch]);
 
     const renderComment = ({ item, index }: renderItemProps) => {
+        console.log(item);
         return (
             <View style={{
                 justifyContent: 'space-between',
@@ -51,20 +54,37 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
                 padding: 15,
                 ...(index > 0) ? { borderTopWidth: 1, borderTopColor: withOpacity(GREY, '99') } : {},
             }}>
-                <Text style={{
-                    color: DARK_GREY,
-                    fontSize: 18,
-                }}>{item.text}</Text>
+                <View>
+                    <Text style={{
+                        color: DARK_GREY,
+                        fontSize: 18,
+                    }}>
+                        {item.text}
+                    </Text>
+                    <Text style={{ fontWeight: 'bold', color: GREY, marginTop: 2 }}>
+                        {getRelativeTime(new Date(item.createdAt))} · {item.likeAmount} likes
+                    </Text>
+                </View>
 
-                {item.createdByUser && (
-                    <TouchableOpacity onPress={() => onDeleteComment(item._id)}>
-                        <FontAwesomeIcon
-                            icon={faTrashCan}
-                            color={PRIMARY}
-                            size={18}
-                        />
-                    </TouchableOpacity>
-                )}
+                <View style={{ flexDirection: 'row' }}>
+                    {item.createdByUser && (
+                        <TouchableOpacity onPress={() => onDeleteComment(item._id)}>
+                            <FontAwesomeIcon
+                                icon={faTrashCan}
+                                color={PRIMARY}
+                                size={20}
+                            />
+                        </TouchableOpacity>
+                    )}
+                    <LikeButton
+                        onLiked={() => console.log('Liked button pressed!')}
+                        liked={false}
+                        count={0}
+                        size={22}
+                        color={PRIMARY}
+                        viewStyle={{marginLeft: 8}}
+                    />
+                </View>
             </View>
         );
     };
