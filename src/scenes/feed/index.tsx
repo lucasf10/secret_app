@@ -93,14 +93,9 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
     return (
         <View style={styles.view}>
             <HeaderFeed navigation={navigation} />
-            { userIsFetching ? (
+            { ((!posts || posts.length === 0) && isFetching) || userIsFetching ? (
                 <Loader style={styles.loader} />
-            ) : !city && (
-                <LocationNotShared />
-            )}
-            { (!posts || posts.length === 0) && isFetching ? (
-                <Loader style={styles.loader} />
-            ) : city && (
+            ) : city ? (
                 <FlatList
                     data={posts}
                     renderItem={renderPosts}
@@ -110,8 +105,9 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={renderFooterLoader}
                     ListEmptyComponent={EmptyFeed}
+                    showsVerticalScrollIndicator={false}
                 />
-            )}
+            ) : (!city && <LocationNotShared />) }
         </View>
     );
 };

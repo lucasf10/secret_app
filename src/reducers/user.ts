@@ -12,6 +12,7 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
     case types.PERFORM_AUTH:
     case types.SIGN_OUT:
     case types.SIGN_UP:
+    case types.GET_LOCATION:
       return {
         ...state,
         isFetching: true,

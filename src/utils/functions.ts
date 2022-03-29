@@ -49,13 +49,10 @@ export const requestLocationPermission = async () => {
   );
   if (granted === PermissionsAndroid.RESULTS.GRANTED)
     return getLocation();
-  else {
-    // Permission denied
-  }
 };
 
 export const getCity = async (latitude: number, longitude: number): Promise<string> => {
   const coords = { lat: latitude, lng: longitude };
   const position = await Geocoder.geocodePosition(coords, { maxResults: 1 });
-  return (position[0]?.locality || '');
+  return (position[0]?.locality || position[0]?.subAdminArea || '');
 };

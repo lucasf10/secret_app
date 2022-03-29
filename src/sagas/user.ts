@@ -51,7 +51,6 @@ function* onUserLogged(action: Action) {
 }
 
 function* onGetLocation(action: Action) {
-  console.log('onGetLocation');
   try {
     const response: LocationResponse|undefined = yield call(Platform.OS === 'ios' ? getLocation : requestLocationPermission);
     if (response && response.coords) {
@@ -70,6 +69,8 @@ function* onGetLocation(action: Action) {
       const isLoggedIn: boolean = yield select((state: State) => state.user.isLoggedIn);
       if (isLoggedIn) yield put(postActions.getPosts(POST_LIMIT_PER_REQUEST, 0, true));
     }
+    else
+      yield put(userActions.error());
   } catch (e) {
     yield put(userActions.error());
   }
