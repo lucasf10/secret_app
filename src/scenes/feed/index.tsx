@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ColorValue, RefreshControl, Text, View } from 'react-native';
+import { ColorValue, RefreshControl, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LoggedStackParamList } from '../../navigation/LoggedStack';
 
@@ -13,10 +13,9 @@ import EmptyFeed from '../../components/molecule/EmptyFeed';
 import Loader from '../../components/atoms/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as postActions } from '../../actions/post';
-import { actions as userActions } from '../../actions/user';
 import { State } from '../../types/common';
 import { POST_LIMIT_PER_REQUEST } from '../../utils/constants';
-import Button from '../../components/atoms/Button';
+import LocationNotShared from '../../components/organisms/LocationNotShared';
 
 export type FeedProp = NativeStackNavigationProp<LoggedStackParamList, 'Feed'>;
 
@@ -97,23 +96,7 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
             { userIsFetching ? (
                 <Loader style={styles.loader} />
             ) : !city && (
-                <View style={{
-                    marginTop: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                <Text style={{
-                    fontSize: 16,
-                }}>You have not shared your location just yet.</Text>
-                    <Button
-                        title={'Click here to do so!'}
-                        onClick={() => dispatch(userActions.getLocation())}
-                        viewStyle={{
-                            marginTop: 20,
-                            width: '82%',
-                        }}
-                    />
-                </View>
+                <LocationNotShared />
             )}
             { (!posts || posts.length === 0) && isFetching ? (
                 <Loader style={styles.loader} />

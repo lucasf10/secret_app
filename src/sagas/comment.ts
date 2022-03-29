@@ -13,7 +13,6 @@ function* onCreateComment(action: Action) {
       yield put(commentActions.finishedOperation());
     }
   } catch (e) {
-    console.log(e);
     yield put(commentActions.error());
   }
 }

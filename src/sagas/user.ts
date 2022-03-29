@@ -71,7 +71,6 @@ function* onGetLocation(action: Action) {
       if (isLoggedIn) yield put(postActions.getPosts(POST_LIMIT_PER_REQUEST, 0, true));
     }
   } catch (e) {
-    console.log(e);
     yield put(userActions.error());
   }
 }

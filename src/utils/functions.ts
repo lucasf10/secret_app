@@ -47,7 +47,6 @@ export const requestLocationPermission = async () => {
   const granted = await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
   );
-  console.log(granted);
   if (granted === PermissionsAndroid.RESULTS.GRANTED)
     return getLocation();
   else {
