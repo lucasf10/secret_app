@@ -11,6 +11,7 @@ const postState = (state = INITIAL_STATE, action: Action): PostState => {
   switch (action.type) {
     case types.GET_POSTS:
     case types.OPEN_POST_PAGE:
+    case types.CREATE_POST:
       return {
         ...state,
         isFetching: true,

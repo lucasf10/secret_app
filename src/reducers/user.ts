@@ -19,6 +19,8 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
     case types.SET_LOGGED:
     case types.SET_USER_DATA:
     case types.SET_ACCESS_TOKEN:
+    case types.SET_LOCATION:
+    case types.SET_CITY:
       return {
         ...state,
         ...action.payload,

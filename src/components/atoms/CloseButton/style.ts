@@ -8,7 +8,7 @@ const style = StyleSheet.create({
         zIndex: 1,
         paddingVertical: 15,
         paddingHorizontal: 10,
-    }
+    },
 });
 
 export default style;

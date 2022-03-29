@@ -10,3 +10,9 @@ export const getPostDetails = (postId: string): Promise<AxiosResponse> => api.ge
 export const likePost = (postId: string): Promise<AxiosResponse> => api.post(`posts/${postId}/like`);
 
 export const dislikePost = (postId: string): Promise<AxiosResponse> => api.post(`posts/${postId}/dislike`);
+
+export const createPost = (
+    text: string,
+    colorCode: string,
+    coordinates: [number, number],
+): Promise<AxiosResponse> => api.post('posts', { text, colorCode, location: { coordinates } });

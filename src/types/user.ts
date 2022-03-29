@@ -4,6 +4,10 @@ export interface UserState {
   signUp?: boolean;
   accessToken?: string;
   user?: User;
+  location?: {
+    coordinates: [number, number]
+  }
+  city?: string;
 }
 
 export interface User {

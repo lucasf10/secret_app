@@ -1,10 +1,13 @@
-import { call, put, takeEvery, ForkEffect } from 'redux-saga/effects';
+import { call, put, takeEvery, ForkEffect, take, select } from 'redux-saga/effects';
 import { types, actions as userActions } from '../actions/user';
 import { actions as postActions } from '../actions/post';
 import { performAuth, performSignUp } from '../services/users';
 import api from '../services/api';
-import { Action } from '../types/common';
+import { Action, LocationResponse, State } from '../types/common';
 import { User, UserForm } from '../types/user';
+import { Platform } from 'react-native';
+import { getCity, getLocation, requestLocationPermission } from '../utils/functions';
+import { POST_LIMIT_PER_REQUEST } from '../utils/constants';
 
 function* onPerformAuth(action: Action) {
   try {
@@ -47,6 +50,33 @@ function* onUserLogged(action: Action) {
   api.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 }
 
+function* onGetLocation(action: Action) {
+  console.log('onGetLocation');
+  try {
+    const response: LocationResponse|undefined = yield call(Platform.OS === 'ios' ? getLocation : requestLocationPermission);
+    if (response && response.coords) {
+      const location: { coordinates: [number, number]} = {
+        coordinates: [response.coords.latitude, response.coords.longitude],
+      };
+      yield put(userActions.setLocation(location));
+
+      const city: string = yield call(
+        getCity,
+        location.coordinates[0],
+        location.coordinates[1],
+      );
+      yield put(userActions.setCity(city));
+
+      const isLoggedIn: boolean = yield select((state: State) => state.user.isLoggedIn);
+      if (isLoggedIn) yield put(postActions.getPosts(POST_LIMIT_PER_REQUEST, 0, true));
+    }
+  } catch (e) {
+    console.log(e);
+    yield put(userActions.error());
+  }
+}
+
+
 export default function* watchUser(): Generator<
   ForkEffect<never>,
   void,
@@ -56,4 +86,5 @@ export default function* watchUser(): Generator<
   yield takeEvery(types.SIGN_UP, onSignUp);
   yield takeEvery(types.SIGN_OUT, onSignOut);
   yield takeEvery(types.SET_LOGGED, onUserLogged);
+  yield takeEvery(types.GET_LOCATION, onGetLocation);
 }

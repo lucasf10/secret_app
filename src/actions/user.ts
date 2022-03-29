@@ -7,7 +7,10 @@ export const types = {
   SET_ACCESS_TOKEN: `${name}/SET_ACCESS_TOKEN`,
   SET_USER_DATA: `${name}/SET_USER_DATA`,
   PERFORM_AUTH: `${name}/PERFORM_AUTH`,
+  GET_LOCATION: `${name}/GET_LOCATION`,
+  SET_LOCATION: `${name}/SET_LOCATION`,
   SET_LOGGED: `${name}/SET_LOGGED`,
+  SET_CITY: `${name}/SET_CITY`,
   SIGN_OUT: `${name}/SIGN_OUT`,
   SIGN_UP: `${name}/SIGN_UP`,
   ERROR: `${name}/ERROR`,
@@ -25,6 +28,17 @@ export const actions = {
   performAuth: (email: string, password: string): Action => ({
     type: types.PERFORM_AUTH,
     payload: { email, password },
+  }),
+  getLocation: (): Action => ({
+    type: types.GET_LOCATION,
+  }),
+  setLocation: (location: { coordinates: [number, number] }): Action => ({
+    type: types.SET_LOCATION,
+    payload: { location },
+  }),
+  setCity: (city: string ): Action => ({
+    type: types.SET_LOCATION,
+    payload: { city },
   }),
   signUp: (payload: UserForm): Action => ({
     type: types.SIGN_UP,

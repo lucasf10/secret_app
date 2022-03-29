@@ -7,12 +7,17 @@ import { PRIMARY } from '../../../utils/colors';
 import styles from './style';
 import { Logo } from '../../../assets/images';
 import { actions as userActions} from '../../../actions/user';
+import { FeedProp } from '../../../scenes/feed';
 
+type Props = {
+    navigation: FeedProp;
+}
 
-const HeaderFeed = (): React.ReactElement => {
+const HeaderFeed = ({ navigation }: Props): React.ReactElement => {
     const dispatch = useDispatch();
 
     const LogOut = () => dispatch(userActions.signOut());
+    const goToCreatePost = () => navigation.navigate('CreatePost');
 
     return (
       <View style={styles.headerView}>
@@ -22,7 +27,7 @@ const HeaderFeed = (): React.ReactElement => {
 
           <Image resizeMode="contain" source={Logo} style={styles.logo} />
 
-          <TouchableOpacity onPress={() => console.log('Pressed')}>
+          <TouchableOpacity onPress={goToCreatePost}>
               <FontAwesomeIcon icon={faPenToSquare} color={PRIMARY} size={22} />
           </TouchableOpacity>
       </View>

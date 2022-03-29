@@ -5,6 +5,14 @@ export const TOAST_DURATION = 3000;
 
 export const POST_LIMIT_PER_REQUEST = 10;
 
+export const AVAILABLE_COLORS = ['black', 'red', 'purple', 'green', 'grey', 'blue', 'brown'];
+
+export const LOCATION_OPTIONS = {
+  enableHighAccuracy: true,
+  timeout: 20000,
+  maximumAge: 1000,
+};
+
 export const DefaultStackOptions = { headerShown: false };
 
 export const SignUpForm: Field[] = [

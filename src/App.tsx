@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Toast from 'react-native-easy-toast';
@@ -15,6 +15,10 @@ const App = () => {
   const { dispatch } = store;
   const [loggedIn, setLoggedIn] = useState(store.getState().user.isLoggedIn);
   const [toast, setToast] = useState<any>();
+
+  useEffect(() => {
+    dispatch(userActions.getLocation());
+  }, [dispatch]);
 
   store.subscribe(() => {
     const logged = store.getState().user.isLoggedIn;

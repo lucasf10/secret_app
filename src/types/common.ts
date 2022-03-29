@@ -17,3 +17,10 @@ export interface State {
 export interface ToastState {
   text: string;
 }
+
+export interface LocationResponse {
+  coords: {
+    latitude: number,
+    longitude: number
+  }
+}

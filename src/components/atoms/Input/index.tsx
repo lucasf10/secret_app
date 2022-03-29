@@ -13,6 +13,7 @@ export interface Props {
   secureTextEntry?: boolean;
   placeholderTextColor?: string;
   onBlur?: () => void;
+  onFocus?: () => void;
   maxLength?: number;
   multiline?: boolean;
   autoCapitalize?: 'characters' | 'words' | 'none';
@@ -24,6 +25,7 @@ const Input = (props: Props): React.ReactElement => {
     style,
     value,
     onBlur,
+    onFocus,
     onChange,
     secureTextEntry,
     placeholderTextColor,
@@ -46,6 +48,7 @@ const Input = (props: Props): React.ReactElement => {
       defaultValue={defaultValue}
       editable={editable}
       onBlur={onBlur}
+      onFocus={onFocus}
       secureTextEntry={secureTextEntry}
       onChangeText={(_value) => onChange && onChange(_value)}
       autoCapitalize={autoCapitalize}

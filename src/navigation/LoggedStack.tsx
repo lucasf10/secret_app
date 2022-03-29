@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import FeedScreen from '../scenes/feed';
 import PostScreen from '../scenes/post';
 import { DefaultStackOptions } from '../utils/constants';
+import CreatePostScreen from '../scenes/createPosts';
 
 export type LoggedStackParamList = {
   Feed: undefined;
   Post: undefined;
+  CreatePost: undefined;
 };
 
 const Stack = createNativeStackNavigator<LoggedStackParamList>();
@@ -24,6 +26,11 @@ export const LoggedStack = (): React.ReactElement => {
         <Stack.Screen
           name="Post"
           component={PostScreen}
+          options={DefaultStackOptions}
+        />
+        <Stack.Screen
+          name="CreatePost"
+          component={CreatePostScreen}
           options={DefaultStackOptions}
         />
       </Stack.Navigator>
