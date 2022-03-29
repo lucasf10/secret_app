@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import styles from './style';
 import { Comment } from '../../../types/comment';
 import CommentList from '../CommentList';
-import AddComment from '../../molecule/AddComment';
+import AddComment from '../../molecules/AddComment';
 
 
 type Props = {

@@ -1,7 +1,7 @@
 import { call, put, takeEvery, ForkEffect, select } from 'redux-saga/effects';
 import { types, actions as postActions } from '../actions/post';
 import { actions as userActions } from '../actions/user';
-import { CreatePostProp } from '../scenes/createPosts';
+import { CreatePostProp } from '../scenes/createPost';
 import { FeedProp } from '../scenes/feed';
 import {
   getPosts,
@@ -51,7 +51,7 @@ function* onLikedPost(action: Action) {
 
     yield put(userActions.setUserData(user));
     yield put(postActions.getPost(postId as string));
-    yield put(postActions.getPosts('', currentPosts.length, 0, true));
+    yield put(postActions.getPosts(currentPosts.length, 0, true));
   } catch (e) {
     yield put(postActions.error());
   }

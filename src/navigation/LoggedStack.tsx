@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import FeedScreen from '../scenes/feed';
 import PostScreen from '../scenes/post';
 import { DefaultStackOptions } from '../utils/constants';
-import CreatePostScreen from '../scenes/createPosts';
+import CreatePostScreen from '../scenes/createPost';
 
 export type LoggedStackParamList = {
   Feed: undefined;

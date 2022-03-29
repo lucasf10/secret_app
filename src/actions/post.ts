@@ -1,4 +1,4 @@
-import { CreatePostProp } from '../scenes/createPosts';
+import { CreatePostProp } from '../scenes/createPost';
 import { FeedProp } from '../scenes/feed';
 import { Action } from '../types/common';
 import { Post } from '../types/post';

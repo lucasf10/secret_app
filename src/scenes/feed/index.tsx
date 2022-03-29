@@ -9,7 +9,7 @@ import Post from '../../components/organisms/Post';
 import { Post as PostType } from '../../types/post'
 import { FlatList } from 'react-native-gesture-handler';
 import { PRIMARY } from '../../utils/colors';
-import EmptyFeed from '../../components/molecule/EmptyFeed';
+import EmptyFeed from '../../components/molecules/EmptyFeed';
 import Loader from '../../components/atoms/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions as postActions } from '../../actions/post';

@@ -2,7 +2,7 @@ import React from 'react';
 import { ColorValue, View } from 'react-native';
 
 import styles from './style';
-import PostFooter from '../../molecule/PostFooter';
+import PostFooter from '../../molecules/PostFooter';
 import PostContent from '../../atoms/PostContent';
 
 type Props = {

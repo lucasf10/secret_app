@@ -5,7 +5,7 @@ import { GREY, withOpacity } from '../../../utils/colors';
 
 import styles from './style';
 import { getRelativeTime } from '../../../utils/functions';
-import CommentActions from '../../molecule/CommentActions';
+import CommentActions from '../../molecules/CommentActions';
 
 type Props = {
     comment: CommentType;
