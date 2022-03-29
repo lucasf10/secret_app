@@ -47,6 +47,7 @@ const CommentList = ({ comments, postId }: Props): React.ReactElement => {
             renderItem={renderComment}
             refreshControl={refreshControl}
             ListEmptyComponent={EmptyComments}
+            showsVerticalScrollIndicator={false}
         />
     );
 };
