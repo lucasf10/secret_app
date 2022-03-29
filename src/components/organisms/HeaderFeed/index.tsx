@@ -3,6 +3,7 @@ import { Image, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { faPenToSquare, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PRIMARY } from '../../../utils/colors';
 import styles from './style';
 import { Logo } from '../../../assets/images';

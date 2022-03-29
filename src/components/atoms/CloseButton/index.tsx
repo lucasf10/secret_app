@@ -6,9 +6,10 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { WHITE, withOpacity } from '../../../utils/colors';
 import styles from './style';
 import { PostProp } from '../../../scenes/post';
+import { CreatePostProp } from '../../../scenes/createPost';
 
 type Props = {
-    navigation: PostProp;
+    navigation: PostProp|CreatePostProp;
     color?: string;
     size?: number;
     opacity?: string;
