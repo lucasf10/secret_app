@@ -6,9 +6,9 @@ const style = StyleSheet.create({
         paddingLeft: 0,
         borderWidth: 0,
         textAlign: 'center',
-        fontSize: 22,
-        fontWeight: 'bold',
+        fontSize: 28,
         color: WHITE,
+        fontFamily: 'WhitneyCondensed-Medium',
     },
     viewInput: {
         flex: 1,

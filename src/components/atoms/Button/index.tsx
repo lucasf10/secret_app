@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import styles from './style';
+import Text from '../DefaultFontText';
 
 export interface Props {
   title: string;
@@ -39,7 +40,7 @@ const Button = (props: Props): React.ReactElement => {
       accessibilityLabel={accessibilityLabel}
       disabled={disabled}
     >
-      <Text style={customTextStyle}>
+      <Text fontWeight="Semibold" style={customTextStyle}>
           {title}
       </Text>
     </TouchableOpacity>

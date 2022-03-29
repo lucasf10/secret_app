@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, Image, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -8,6 +8,7 @@ import { RootStackParamList } from '../../navigation/WelcomeStack';
 import styles from './style';
 import { Logo } from '../../assets/images';
 import Form from '../../components/organisms/Form';
+import Text from '../../components/atoms/DefaultFontText';
 import { actions as userActions } from '../../actions/user';
 import { actions as toast } from '../../actions/toast';
 import { SignUpForm, SignInForm, SignUpValidationSchema, SignInValidationSchema } from '../../utils/constants';

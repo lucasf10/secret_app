@@ -51,5 +51,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>WhitneyCondensed-Light.otf</string>
+		<string>WhitneyCondensed-Medium.otf</string>
+		<string>WhitneyCondensed-Semibold.otf</string>
+		<string>WhitneyCondensed-Black.otf</string>
+		<string>WhitneyCondensed-Book.otf</string>
+	</array>
 </dict>
 </plist>

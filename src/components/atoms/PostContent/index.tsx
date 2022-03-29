@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
+import Text from '../DefaultFontText';
 import styles from './style';
 
 type Props = {
@@ -11,7 +12,7 @@ const PostContent = ({ text }: Props): React.ReactElement => {
 
     return (
         <View style={styles.view}>
-            <Text style={styles.text}>{text}</Text>
+            <Text fontWeight="Medium" style={styles.text}>{text}</Text>
         </View>
     );
 };

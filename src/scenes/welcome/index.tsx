@@ -1,8 +1,10 @@
 import React from 'react';
-import { Image, Text, View, TouchableOpacity } from 'react-native';
+import { Image, View, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 import { RootStackParamList } from '../../navigation/WelcomeStack';
 import Button from '../../components/atoms/Button';
+import Text from '../../components/atoms/DefaultFontText';
 
 import styles from './style';
 import { Logo } from '../../assets/images';
@@ -23,7 +25,7 @@ const WelcomeScreen = ({ navigation }: Props): React.ReactElement => {
         <View style={styles.container}>
             <Image source={Logo} style={styles.logo} />
 
-            <Text style={styles.appTitle}>secret</Text>
+            <Text fontWeight="Semibold" style={styles.appTitle}>secret</Text>
 
             <View style={styles.subtitleWrapper}>
                 <Text style={styles.subtitleText}>Share anonymously with your region.</Text>

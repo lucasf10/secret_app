@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import Text from '../DefaultFontText';
 import { WHITE } from '../../../utils/colors';
 import styles from './style';
 
@@ -28,7 +29,7 @@ const CommentButton = ({ onClickCommentButton, color, size, textStyle, viewStyle
                 color={color || WHITE}
                 size={size || 22}
             />
-            { count > 0 && <Text style={{...textStyle, ...styles.text}}>{count}</Text>}
+            { count > 0 && <Text fontWeight="Book" style={{...textStyle, ...styles.text}}>{count}</Text>}
         </TouchableOpacity>
     );
 };

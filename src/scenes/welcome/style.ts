@@ -15,18 +15,19 @@ const style = StyleSheet.create({
         marginRight: 15,
     },
     appTitle: {
-        fontSize: 30,
-        fontWeight: '500',
+        fontSize: 36,
+        letterSpacing: 1,
     },
     subtitleWrapper: {
         alignItems: 'center',
         marginVertical: 20,
     },
     subtitleText: {
-        fontSize: 18,
+        fontSize: 24,
+        lineHeight: 30,
     },
     loginButton: {
-        fontSize: 16,
+        fontSize: 20,
         color: GREY,
     },
     signUpButton: {

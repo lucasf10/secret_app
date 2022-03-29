@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { GREY } from '../../utils/colors';
 
 const style = StyleSheet.create({
     container: {
@@ -25,8 +26,8 @@ const style = StyleSheet.create({
         fontSize: 18,
     },
     loginButton: {
-        fontSize: 16,
-        color: '#a9a8a8',
+        color: GREY,
+        fontSize: 20,
     },
     signUpButton: {
         marginTop: 50,

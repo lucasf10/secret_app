@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
 
+import Text from '../DefaultFontText';
 import { WHITE } from '../../../utils/colors';
 import styles from './style';
 
@@ -25,7 +26,7 @@ const LikeButton = ({ onLiked, liked, size, color, viewStyle, textStyle, count }
                 color={color || WHITE}
                 size={size || 22}
             />
-            { count > 0 && <Text style={{...textStyle, ...styles.text}}>{count}</Text>}
+            { count > 0 && <Text fontWeight="Book" style={{...textStyle, ...styles.text}}>{count}</Text>}
         </TouchableOpacity>
     );
 };

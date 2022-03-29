@@ -11,8 +11,8 @@ const style = StyleSheet.create({
     },
     text: {
         color: WHITE,
-        fontWeight: '700',
-        fontSize: 18,
+        fontSize: 20,
+        letterSpacing: 1,
     },
 });
 

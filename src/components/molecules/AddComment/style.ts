@@ -11,7 +11,8 @@ const style = StyleSheet.create({
         flex: 1,
         borderWidth: 0,
         paddingLeft: 15,
-        fontSize: 16,
+        fontSize: 20,
+        fontFamily: 'WhitneyCondensed-Book',
     },
     viewButton: {
         backgroundColor: 'transparent',

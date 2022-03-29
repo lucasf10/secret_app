@@ -10,12 +10,12 @@ const style = StyleSheet.create({
     },
     text: {
         color: DARK_GREY,
-        fontSize: 18,
+        fontSize: 20,
     },
     meta: {
-        fontWeight: 'bold',
+        fontSize: 16,
         color: GREY,
-        marginTop: 2,
+        marginTop: 3,
     },
 });
 

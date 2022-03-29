@@ -7,8 +7,8 @@ const style = StyleSheet.create({
   },
   inputStyle: {
     marginBottom: 20,
-    fontSize: 16,
-
+    fontSize: 20,
+    fontFamily: 'WhitneyCondensed-Book',
   },
   sendButtonStyle: {
     marginBottom: 20,
