@@ -104,7 +104,7 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
                     onEndReached={loadMore}
                     onEndReachedThreshold={0.5}
                     ListFooterComponent={renderFooterLoader}
-                    ListEmptyComponent={EmptyFeed}
+                    ListEmptyComponent={() => <EmptyFeed navigation={navigation} />}
                     showsVerticalScrollIndicator={false}
                 />
             ) : (!city && <LocationNotShared />) }
