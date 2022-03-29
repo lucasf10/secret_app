@@ -27,7 +27,7 @@ export const getRelativeTime = (date: Date): string => {
   const differenceInHours = differenceInMinutes / 60;
   const differenceInDays = differenceInHours / 24;
 
-  if (differenceInDays >= 1) return `${Math.trunc(differenceInDays)} days ago`;
+  if (differenceInDays >= 1) return `${Math.trunc(differenceInDays)}d ago`;
   if (differenceInHours >= 1) return `${Math.trunc(differenceInHours)}h ago`;
   else if (differenceInMinutes >= 1) return `${Math.trunc(differenceInMinutes)}m ago`;
   else return 'a few seconds ago';
