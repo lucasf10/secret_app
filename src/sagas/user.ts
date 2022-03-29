@@ -1,4 +1,4 @@
-import { call, put, takeEvery, ForkEffect, take, select } from 'redux-saga/effects';
+import { call, put, takeEvery, ForkEffect, select } from 'redux-saga/effects';
 import { types, actions as userActions } from '../actions/user';
 import { actions as postActions } from '../actions/post';
 import { performAuth, performSignUp } from '../services/users';
