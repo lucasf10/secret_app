@@ -54,6 +54,10 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
         launchImageLibrary(IMAGE_PICKER_OPTIONS, selectImageCallback);
     };
 
+    const onRemovePicture = () => {
+        setImage(null);
+    }
+
     return (
         <ImageBackground
             resizeMode="cover"
@@ -87,6 +91,7 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
                     modalVisible={modal}
                     onCloseModal={closeModal}
                     onSelectGallery={onSelectGallery}
+                    onRemovePicture={image ? onRemovePicture : undefined}
                 />
             </View>
         </ImageBackground>

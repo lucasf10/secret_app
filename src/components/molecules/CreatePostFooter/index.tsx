@@ -14,6 +14,7 @@ type Props = {
     onClickCameraButton: () => void;
     onCloseModal: () => void;
     onSelectGallery: () => void;
+    onRemovePicture?: () => void;
     hideShuffleButton: boolean;
 };
 
@@ -26,6 +27,7 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
         onClickCameraButton,
         onCloseModal,
         onSelectGallery,
+        onRemovePicture,
         hideShuffleButton,
     } = props;
 
@@ -45,6 +47,7 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
                 onClose={onCloseModal}
                 onSelectCamera={onSelectCamera}
                 onSelectGallery={onSelectGallery}
+                onRemovePicture={onRemovePicture}
             />
         </View>
     );
