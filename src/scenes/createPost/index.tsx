@@ -11,7 +11,7 @@ import CreatePostButton from '../../components/atoms/CreatePostButton';
 import CreatePostFooter from '../../components/molecules/CreatePostFooter';
 import CreatePostInput from '../../components/molecules/CreatePostInput';
 import { actions as toastActions } from '../../actions/toast';
-import { CAMERA_OPTIONS, IMAGE_PICKER_OPTIONS } from '../../utils/constants';
+import { B64_PREFIX, CAMERA_OPTIONS, IMAGE_PICKER_OPTIONS } from '../../utils/constants';
 import { useDispatch } from 'react-redux';
 import { requestCameraPermission } from '../../utils/functions';
 
@@ -63,7 +63,7 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
         <ImageBackground
             resizeMode="cover"
             source= {{
-                uri:`data:image/png;base64,${image?.base64}`,
+                uri:`${B64_PREFIX}${image?.base64}`,
             }}
         >
             <View style={{
@@ -78,6 +78,7 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
                     postColor={currentBGColor}
                     color={currentTextColor}
                     textColor={currentTextColor}
+                    backgroundImage={image?.base64}
                 />
 
                 <CreatePostInput

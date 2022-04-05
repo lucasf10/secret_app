@@ -16,17 +16,18 @@ type Props = {
     postColor: string;
     opacity?: string;
     textColor: string;
+    backgroundImage?: string;
 };
 
-const CreatePostButton = ({ navigation, text, color, postColor, textColor, opacity }: Props): React.ReactElement => {
+const CreatePostButton = ({ navigation, text, color, postColor, textColor, opacity, backgroundImage }: Props): React.ReactElement => {
     const dispatch = useDispatch();
 
     const opaqueColor = withOpacity(color || WHITE, 'CC' || opacity);
 
     const createPost = useCallback(() => {
         if (text && text !== '')
-            dispatch(postActions.createPost(navigation, text, postColor, textColor));
-    }, [navigation, text, postColor, textColor, dispatch]);
+            dispatch(postActions.createPost(navigation, text, postColor, textColor, backgroundImage));
+    }, [navigation, text, postColor, textColor, backgroundImage, dispatch]);
 
     return (
         <TouchableOpacity onPress={createPost} style={styles.sendButton}>

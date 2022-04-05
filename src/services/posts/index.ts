@@ -16,4 +16,5 @@ export const createPost = (
     colorCode: string,
     textColor: string,
     coordinates: [number, number],
-): Promise<AxiosResponse> => api.post('posts', { text, textColor, colorCode, location: { coordinates } });
+    backgroundImage?: string,
+): Promise<AxiosResponse> => api.post('posts', { text, textColor, colorCode, backgroundImage, location: { coordinates } });

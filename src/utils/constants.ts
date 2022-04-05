@@ -17,6 +17,8 @@ export const LOCATION_OPTIONS = {
   maximumAge: 1000,
 };
 
+export const B64_PREFIX = 'data:image/png;base64,';
+
 export const CAMERA_OPTIONS: CameraOptions = {
   mediaType: 'photo',
   quality: 0.6,

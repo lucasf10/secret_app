@@ -16,4 +16,5 @@ export interface Post {
     likeAmount: number,
     comments: Comment[] | string[],
     likedByUser: boolean,
+    backgroundImage?: string; // At first lets store it in base64 format
 }

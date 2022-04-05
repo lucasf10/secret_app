@@ -77,7 +77,7 @@ function* onGetPostDetails(action: Action) {
 
 function* onCreatePost(action: Action) {
   try {
-    const { navigation, text, colorCode, textColor } = action.payload!;
+    const { navigation, text, colorCode, textColor, backgroundImage } = action.payload!;
     const userState: UserState = yield select((state: State) => state.user);
     yield call(
       createPost,
@@ -85,6 +85,7 @@ function* onCreatePost(action: Action) {
       colorCode as string,
       textColor as string,
       userState.location!.coordinates,
+      backgroundImage as string,
     );
     yield put(postActions.getPosts(POST_LIMIT_PER_REQUEST, 0, true));
     (navigation as CreatePostProp).navigate('Feed');

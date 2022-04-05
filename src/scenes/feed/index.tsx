@@ -59,6 +59,7 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
                 likeCount={item.likeAmount}
                 commentCount={item.comments.length}
                 onClickCommentButton={() => dispatch(postActions.openPostPage(item._id, navigation))}
+                backgroundImage={item.backgroundImage}
             />
         );
     };
