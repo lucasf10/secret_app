@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { ColorValue, View, ViewStyle } from 'react-native';
 
 import style from './style';
 import LikeButton from '../../atoms/LikeButton';
@@ -12,6 +12,7 @@ type Props = {
     likeCount: number;
     commentCount: number;
     likeStyle?: ViewStyle;
+    color: ColorValue;
 };
 
 const PostFooter = (props: Props): React.ReactElement => {
@@ -22,6 +23,7 @@ const PostFooter = (props: Props): React.ReactElement => {
         likeCount,
         commentCount,
         likeStyle,
+        color,
     } = props;
 
     return (
@@ -29,6 +31,8 @@ const PostFooter = (props: Props): React.ReactElement => {
             <CommentButton
                 count={commentCount}
                 onClickCommentButton={onClickCommentButton}
+                color={color}
+                textStyle={{ color }}
             />
 
             <LikeButton
@@ -36,6 +40,8 @@ const PostFooter = (props: Props): React.ReactElement => {
                 liked={like}
                 viewStyle={{...style.like, ...likeStyle}}
                 count={likeCount}
+                color={color}
+                textStyle={{ color }}
             />
         </View>
     );

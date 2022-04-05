@@ -12,6 +12,7 @@ export interface Post {
     text: string,
     city?: string,
     colorCode?: ColorValue,
+    textColor: ColorValue,
     likeAmount: number,
     comments: Comment[] | string[],
     likedByUser: boolean,

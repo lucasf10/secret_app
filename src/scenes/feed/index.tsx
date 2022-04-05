@@ -53,6 +53,7 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
             <Post
                 text={item.text}
                 color={item.colorCode!}
+                textColor={item.textColor}
                 isLiked={item.likedByUser}
                 onLiked={() => dispatch(postActions.likePost(item._id, item.likedByUser))}
                 likeCount={item.likeAmount}

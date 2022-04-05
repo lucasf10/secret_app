@@ -77,12 +77,13 @@ function* onGetPostDetails(action: Action) {
 
 function* onCreatePost(action: Action) {
   try {
-    const { navigation, text, colorCode } = action.payload!;
+    const { navigation, text, colorCode, textColor } = action.payload!;
     const userState: UserState = yield select((state: State) => state.user);
     yield call(
       createPost,
       text as string,
       colorCode as string,
+      textColor as string,
       userState.location!.coordinates,
     );
     yield put(postActions.getPosts(POST_LIMIT_PER_REQUEST, 0, true));

@@ -8,6 +8,7 @@ import PostContent from '../../atoms/PostContent';
 type Props = {
     color: ColorValue;
     text: string;
+    textColor: ColorValue;
     isLiked: boolean;
     onLiked: () => void;
     likeCount: number;
@@ -19,6 +20,7 @@ const Post = (props: Props): React.ReactElement => {
     const {
         color,
         text,
+        textColor,
         isLiked,
         onLiked,
         likeCount,
@@ -33,13 +35,14 @@ const Post = (props: Props): React.ReactElement => {
 
     return (
         <View style={viewStyle}>
-            <PostContent text={text}/>
+            <PostContent text={text} color={textColor} />
             <PostFooter
                 onLiked={onLiked}
                 like={isLiked}
                 likeCount={likeCount}
                 commentCount={commentCount}
                 onClickCommentButton={onClickCommentButton}
+                color={textColor}
             />
         </View>
     );

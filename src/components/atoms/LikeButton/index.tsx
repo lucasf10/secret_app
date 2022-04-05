@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { ColorValue, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faEmptyHeart } from '@fortawesome/free-regular-svg-icons';
@@ -12,7 +12,7 @@ type Props = {
     onLiked: () => void;
     liked: boolean;
     size?: number;
-    color?: string;
+    color?: ColorValue;
     viewStyle?: ViewStyle;
     textStyle?: TextStyle;
     count: number;
@@ -23,10 +23,10 @@ const LikeButton = ({ onLiked, liked, size, color, viewStyle, textStyle, count }
         <TouchableOpacity style={{...viewStyle, ...styles.view}} onPress={onLiked}>
             <FontAwesomeIcon
                 icon={liked ? faHeart : faEmptyHeart }
-                color={color || WHITE}
+                color={color as string || WHITE}
                 size={size || 22}
             />
-            { count > 0 && <Text fontWeight="Book" style={{...textStyle, ...styles.text}}>{count}</Text>}
+            { count > 0 && <Text fontWeight="Book" style={{...styles.text, ...textStyle}}>{count}</Text>}
         </TouchableOpacity>
     );
 };

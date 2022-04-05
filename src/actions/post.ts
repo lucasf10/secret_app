@@ -41,9 +41,10 @@ export const actions = {
     navigation: CreatePostProp,
     text: string,
     colorCode: string,
+    textColor: string,
   ): Action => ({
     type: types.CREATE_POST,
-    payload: { navigation, text, colorCode },
+    payload: { navigation, text, colorCode, textColor },
   }),
   openPostPage: (postId: string, navigation: FeedProp): Action => ({
     type: types.OPEN_POST_PAGE,

@@ -14,5 +14,6 @@ export const dislikePost = (postId: string): Promise<AxiosResponse> => api.post(
 export const createPost = (
     text: string,
     colorCode: string,
+    textColor: string,
     coordinates: [number, number],
-): Promise<AxiosResponse> => api.post('posts', { text, colorCode, location: { coordinates } });
+): Promise<AxiosResponse> => api.post('posts', { text, textColor, colorCode, location: { coordinates } });

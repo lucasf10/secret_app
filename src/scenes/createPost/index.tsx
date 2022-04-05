@@ -77,6 +77,7 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
                     text={text}
                     postColor={currentBGColor}
                     color={currentTextColor}
+                    textColor={currentTextColor}
                 />
 
                 <CreatePostInput

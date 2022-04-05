@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { ColorValue, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import styles from './style';
 
 type Props = {
     onClickCommentButton?: () => void;
-    color?: string;
+    color?: ColorValue;
     size?: number;
     viewStyle?: ViewStyle;
     textStyle?: TextStyle;
@@ -26,10 +26,10 @@ const CommentButton = ({ onClickCommentButton, color, size, textStyle, viewStyle
         >
             <FontAwesomeIcon
                 icon={faComment}
-                color={color || WHITE}
+                color={color as string || WHITE}
                 size={size || 22}
             />
-            { count > 0 && <Text fontWeight="Book" style={{...textStyle, ...styles.text}}>{count}</Text>}
+            { count > 0 && <Text fontWeight="Book" style={{...styles.text, ...textStyle}}>{count}</Text>}
         </TouchableOpacity>
     );
 };
