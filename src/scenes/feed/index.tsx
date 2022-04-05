@@ -51,15 +51,9 @@ const FeedScreen = ({ navigation }: Props): React.ReactElement => {
     const renderPosts = ({ item }: { item: PostType }) => {
         return (
             <Post
-                text={item.text}
-                color={item.colorCode!}
-                textColor={item.textColor}
-                isLiked={item.likedByUser}
                 onLiked={() => dispatch(postActions.likePost(item._id, item.likedByUser))}
-                likeCount={item.likeAmount}
-                commentCount={item.comments.length}
                 onClickCommentButton={() => dispatch(postActions.openPostPage(item._id, navigation))}
-                backgroundImage={item.backgroundImage}
+                post={item}
             />
         );
     };

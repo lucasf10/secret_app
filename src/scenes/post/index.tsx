@@ -30,17 +30,7 @@ const PostScreen = ({ navigation }: Props): React.ReactElement => {
     return (
         <View style={styles.view}>
             <CloseButton navigation={navigation}/>
-            <Post
-                color={post?.colorCode || BLACK}
-                text={post?.text}
-                textColor={post?.textColor}
-                isLiked={post?.likedByUser}
-                onLiked={onLiked}
-                likeCount={post?.likeAmount}
-                commentCount={post?.comments.length}
-                backgroundImage={post?.backgroundImage}
-            />
-
+            <Post onLiked={onLiked} post={post} />
             <CommentSection postId={post?._id} comments={post?.comments as Comment[]}  />
         </View>
     );
