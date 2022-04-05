@@ -14,6 +14,7 @@ type Props = {
     onClickCameraButton: () => void;
     onCloseModal: () => void;
     onSelectGallery: () => void;
+    hideShuffleButton: boolean;
 };
 
 const CreatePostFooter = (props: Props): React.ReactElement => {
@@ -25,6 +26,7 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
         onClickCameraButton,
         onCloseModal,
         onSelectGallery,
+        hideShuffleButton,
     } = props;
 
     return (
@@ -36,6 +38,7 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
             <ShuffleButton
                 onSwitchColor={onSwitchColor}
                 currentColor={currentColor}
+                visible={!hideShuffleButton}
             />
             <CameraOptionsModal
                 visible={modalVisible}

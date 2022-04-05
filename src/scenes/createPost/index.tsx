@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, View } from 'react-native';
+import { ImageBackground, Platform, View } from 'react-native';
 import { Asset, ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LoggedStackParamList } from '../../navigation/LoggedStack';
@@ -45,46 +45,51 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
     const onSelectCamera = async () => {
         const permission = Platform.OS === 'ios' || (await requestCameraPermission());
         if (permission)
-            launchCamera(CAMERA_OPTIONS, selectImageCallback,);
+            launchCamera(CAMERA_OPTIONS, selectImageCallback);
         else
             dispatch(toastActions.setToast('Camera was denied'));
     };
 
     const onSelectGallery = () => {
-        launchImageLibrary(
-            IMAGE_PICKER_OPTIONS,
-            selectImageCallback,
-        );
+        launchImageLibrary(IMAGE_PICKER_OPTIONS, selectImageCallback);
     };
 
     return (
-        <View style={{
-            ...styles.view,
-            ...{ backgroundColor: currentColor },
-        }}>
-            <CloseButton color={WHITE} navigation={navigation}/>
+        <ImageBackground
+            resizeMode="cover"
+            source= {{
+                uri:`data:image/png;base64,${image?.base64}`,
+            }}
+        >
+            <View style={{
+                ...styles.view,
+                ...!(image?.base64) ? { backgroundColor: currentColor } : {},
+            }}>
+                <CloseButton color={WHITE} navigation={navigation}/>
 
-            <CreatePostButton
-                navigation={navigation}
-                text={text}
-                postColor={currentColor}
-            />
+                <CreatePostButton
+                    navigation={navigation}
+                    text={text}
+                    postColor={currentColor}
+                />
 
-            <CreatePostInput
-                text={text}
-                onChange={setText}
-            />
+                <CreatePostInput
+                    text={text}
+                    onChange={setText}
+                />
 
-            <CreatePostFooter
-                onSwitchColor={setCurrentColor}
-                currentColor={currentColor}
-                onSelectCamera={onSelectCamera}
-                onClickCameraButton={openModal}
-                modalVisible={modal}
-                onCloseModal={closeModal}
-                onSelectGallery={onSelectGallery}
-            />
-        </View>
+                <CreatePostFooter
+                    hideShuffleButton={!!image}
+                    onSwitchColor={setCurrentColor}
+                    currentColor={currentColor}
+                    onSelectCamera={onSelectCamera}
+                    onClickCameraButton={openModal}
+                    modalVisible={modal}
+                    onCloseModal={closeModal}
+                    onSelectGallery={onSelectGallery}
+                />
+            </View>
+        </ImageBackground>
     );
 };
 

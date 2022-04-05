@@ -10,9 +10,10 @@ type Props = {
     currentColor: string;
     iconColor?: string;
     opacity?: string;
+    visible?: boolean;
 };
 
-const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity }: Props): React.ReactElement => {
+const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity, visible }: Props): React.ReactElement => {
 
     const opaqueColor = withOpacity(iconColor || WHITE, 'CC' || opacity);
 
@@ -23,7 +24,7 @@ const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity }: Prop
     }, [currentColor, onSwitchColor]);
 
     return (
-        <TouchableOpacity onPress={switchColor}>
+        <TouchableOpacity onPress={switchColor} style={{ ...!visible ? { display: 'none' } : {} }}>
             <FontAwesomeIcon icon={faShuffle} color={opaqueColor} size={22} />
         </TouchableOpacity>
     );
