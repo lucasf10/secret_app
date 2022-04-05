@@ -8,9 +8,10 @@ import { LIGHT_GREY } from '../../../utils/colors';
 type Props = {
     text: string;
     onChange: (value: string) => void;
+    color: string;
 };
 
-const CreatePostInput = ({ text, onChange }: Props): React.ReactElement => {
+const CreatePostInput = ({ text, onChange, color }: Props): React.ReactElement => {
     const [placeholder, setPlaceholder] = useState<string>('Share a secret');
 
     return (
@@ -22,7 +23,10 @@ const CreatePostInput = ({ text, onChange }: Props): React.ReactElement => {
                 placeholderTextColor={LIGHT_GREY}
                 onChange={onChange}
                 onFocus={() => setPlaceholder('')}
-                style={styles.input}
+                style={{
+                    ...styles.input,
+                    ...{ color },
+                }}
             />
         </View>
     );

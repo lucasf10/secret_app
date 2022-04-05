@@ -1,12 +1,15 @@
 import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 import * as yup from 'yup';
 import { Field } from '../components/organisms/Form';
+import { BLACK, WHITE } from './colors';
 
 export const TOAST_DURATION = 3000;
 
 export const POST_LIMIT_PER_REQUEST = 10;
 
-export const AVAILABLE_COLORS = ['black', 'red', 'purple', 'green', 'grey', 'blue', 'brown'];
+export const AVAILABLE_BG_COLORS = ['black', 'red', 'purple', 'green', 'grey', 'blue', 'brown'];
+
+export const AVAILABLE_TEXT_COLORS = [WHITE, BLACK];
 
 export const LOCATION_OPTIONS = {
   enableHighAccuracy: true,

@@ -7,7 +7,6 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     onOpenCamera: () => void;
-    currentColor: string;
     iconColor?: string;
     opacity?: string;
 };

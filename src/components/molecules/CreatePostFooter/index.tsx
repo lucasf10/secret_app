@@ -2,13 +2,16 @@ import React from 'react';
 import { View } from 'react-native';
 
 import CameraButton from '../../atoms/CameraButton';
+import ChangeColorButton from '../../atoms/ChangeColorButton';
 import ShuffleButton from '../../atoms/ShuffleButton';
 import CameraOptionsModal from '../CameraOptionsModal';
 import styles from './style';
 
 type Props = {
-    onSwitchColor: (color: string) => void;
-    currentColor: string;
+    onSwitchBGColor: (color: string) => void;
+    onSwitchTextColor: (color: string) => void;
+    currentBGColor: string;
+    currentTextColor: string;
     onSelectCamera: () => void;
     modalVisible: boolean;
     onClickCameraButton: () => void;
@@ -20,8 +23,10 @@ type Props = {
 
 const CreatePostFooter = (props: Props): React.ReactElement => {
     const {
-        currentColor,
-        onSwitchColor,
+        currentBGColor,
+        currentTextColor,
+        onSwitchBGColor,
+        onSwitchTextColor,
         onSelectCamera,
         modalVisible,
         onClickCameraButton,
@@ -33,15 +38,20 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
 
     return (
         <View style={styles.view}>
-            <CameraButton
-                onOpenCamera={onClickCameraButton}
-                currentColor={currentColor}
-            />
-            <ShuffleButton
-                onSwitchColor={onSwitchColor}
-                currentColor={currentColor}
-                visible={!hideShuffleButton}
-            />
+            <CameraButton onOpenCamera={onClickCameraButton} iconColor={currentTextColor} />
+            <View style={styles.rightBottom}>
+                <ChangeColorButton
+                    currentColor={currentTextColor}
+                    onChangeColor={onSwitchTextColor}
+                    iconColor={currentTextColor}
+                />
+                <ShuffleButton
+                    onSwitchColor={onSwitchBGColor}
+                    currentColor={currentBGColor}
+                    visible={!hideShuffleButton}
+                    iconColor={currentTextColor}
+                />
+            </View>
             <CameraOptionsModal
                 visible={modalVisible}
                 onClose={onCloseModal}

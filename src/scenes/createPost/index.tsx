@@ -24,7 +24,8 @@ type Props = {
 const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
     const dispatch = useDispatch();
     const [text, setText] = useState<string>('');
-    const [currentColor, setCurrentColor] = useState<string>('black');
+    const [currentBGColor, setCurrentBGColor] = useState<string>('black');
+    const [currentTextColor, setCurrentTextColor] = useState<string>(WHITE);
     const [modal, setModal] = useState<boolean>(false);
     const [image, setImage] = useState<Asset|null>(null);
 
@@ -67,25 +68,29 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
         >
             <View style={{
                 ...styles.view,
-                ...!(image?.base64) ? { backgroundColor: currentColor } : {},
+                ...!(image?.base64) ? { backgroundColor: currentBGColor } : {},
             }}>
-                <CloseButton color={WHITE} navigation={navigation}/>
+                <CloseButton color={currentTextColor} navigation={navigation} />
 
                 <CreatePostButton
                     navigation={navigation}
                     text={text}
-                    postColor={currentColor}
+                    postColor={currentBGColor}
+                    color={currentTextColor}
                 />
 
                 <CreatePostInput
                     text={text}
                     onChange={setText}
+                    color={currentTextColor}
                 />
 
                 <CreatePostFooter
                     hideShuffleButton={!!image}
-                    onSwitchColor={setCurrentColor}
-                    currentColor={currentColor}
+                    onSwitchBGColor={setCurrentBGColor}
+                    currentBGColor={currentBGColor}
+                    currentTextColor={currentTextColor}
+                    onSwitchTextColor={setCurrentTextColor}
                     onSelectCamera={onSelectCamera}
                     onClickCameraButton={openModal}
                     modalVisible={modal}

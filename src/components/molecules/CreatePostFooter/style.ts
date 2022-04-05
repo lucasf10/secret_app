@@ -8,6 +8,12 @@ const style = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 20,
     },
+    rightBottom: {
+        flexDirection: 'row',
+        width: 60,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
 });
 
 export default style;
