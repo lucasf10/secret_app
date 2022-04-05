@@ -56,3 +56,13 @@ export const getCity = async (latitude: number, longitude: number): Promise<stri
   const position = await Geocoder.geocodePosition(coords, { maxResults: 1 });
   return (position[0]?.locality || position[0]?.subAdminArea || '');
 };
+
+export const requestCameraPermission = async () => {
+  try {
+      const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) return true;
+      else return false;
+  } catch (err) {
+    return false;
+  }
+};

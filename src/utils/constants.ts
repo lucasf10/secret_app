@@ -1,3 +1,4 @@
+import { CameraOptions, ImageLibraryOptions } from 'react-native-image-picker';
 import * as yup from 'yup';
 import { Field } from '../components/organisms/Form';
 
@@ -11,6 +12,21 @@ export const LOCATION_OPTIONS = {
   enableHighAccuracy: true,
   timeout: 20000,
   maximumAge: 1000,
+};
+
+export const CAMERA_OPTIONS: CameraOptions = {
+  mediaType: 'photo',
+  quality: 0.6,
+  maxWidth: 2000,
+  maxHeight: 2000,
+  includeBase64: true,
+};
+
+export const IMAGE_PICKER_OPTIONS: ImageLibraryOptions = {
+  mediaType: 'photo',
+  selectionLimit: 1,
+  quality: 0.6,
+  includeBase64: true,
 };
 
 export const DefaultStackOptions = { headerShown: false };
