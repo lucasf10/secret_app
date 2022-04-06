@@ -1,5 +1,5 @@
 import React,{ useCallback } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ViewStyle } from 'react-native';
 
 import { WHITE, withOpacity } from '../../../utils/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -11,9 +11,10 @@ type Props = {
     onChangeColor: (color: string) => void;
     iconColor?: string;
     opacity?: string;
+    style?: ViewStyle;
 };
 
-const ChangeColorButton = ({ currentColor, onChangeColor, iconColor, opacity }: Props): React.ReactElement => {
+const ChangeColorButton = ({ currentColor, onChangeColor, iconColor, opacity, style }: Props): React.ReactElement => {
 
     const opaqueColor = withOpacity(iconColor || WHITE, 'CC' || opacity);
 
@@ -24,7 +25,7 @@ const ChangeColorButton = ({ currentColor, onChangeColor, iconColor, opacity }: 
     }, [currentColor, onChangeColor]);
 
     return (
-        <TouchableOpacity onPress={changeColor}>
+        <TouchableOpacity onPress={changeColor} style={style}>
             <FontAwesomeIcon icon={faPencil} color={opaqueColor} size={18} />
         </TouchableOpacity>
     );

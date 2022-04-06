@@ -1,4 +1,4 @@
-import { faCamera, faClose, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faClose, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
@@ -13,7 +13,6 @@ export interface Props {
   onClose: () => void;
   onSelectCamera?: () => void;
   onSelectGallery?: () => void;
-  onRemovePicture?: () => void;
 }
 
 const CameraOptionsModal = ({
@@ -21,7 +20,6 @@ const CameraOptionsModal = ({
   onClose,
   onSelectCamera,
   onSelectGallery,
-  onRemovePicture,
 }: Props): React.ReactElement => {
   return (
     <Modal style={styles.modalPosition} visible={visible} onClose={onClose}>
@@ -37,14 +35,6 @@ const CameraOptionsModal = ({
             <FontAwesomeIcon color={PRIMARY} icon={faImage} size={24} />
             <Text style={styles.text}>
               Choose a picture
-            </Text>
-          </TouchableOpacity>
-        )}
-        {onRemovePicture && (
-          <TouchableOpacity onPress={onRemovePicture} style={styles.option}>
-            <FontAwesomeIcon color={PRIMARY} icon={faTrash} size={24} />
-            <Text style={styles.text}>
-              Remove picture
             </Text>
           </TouchableOpacity>
         )}

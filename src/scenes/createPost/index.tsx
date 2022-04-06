@@ -98,7 +98,8 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
                     modalVisible={modal}
                     onCloseModal={closeModal}
                     onSelectGallery={onSelectGallery}
-                    onRemovePicture={image ? onRemovePicture : undefined}
+                    onRemovePicture={onRemovePicture}
+                    isImageSelected={!!image}
                 />
             </View>
         </ImageBackground>

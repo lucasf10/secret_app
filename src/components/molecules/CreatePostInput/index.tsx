@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import styles from './style';
 import Input from '../../../components/atoms/Input';
-import { LIGHT_GREY } from '../../../utils/colors';
+import { BLACK, LIGHT_GREY, WHITE } from '../../../utils/colors';
 
 type Props = {
     text: string;
@@ -20,7 +20,7 @@ const CreatePostInput = ({ text, onChange, color }: Props): React.ReactElement =
                 multiline
                 value={text}
                 placeholder={placeholder}
-                placeholderTextColor={LIGHT_GREY}
+                placeholderTextColor={color === WHITE ? LIGHT_GREY : `${BLACK}CC` }
                 onChange={onChange}
                 onFocus={() => setPlaceholder('')}
                 style={{

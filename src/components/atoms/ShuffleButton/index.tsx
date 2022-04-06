@@ -1,5 +1,5 @@
 import React,{ useCallback } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, ViewStyle } from 'react-native';
 
 import { WHITE, withOpacity } from '../../../utils/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -10,10 +10,10 @@ type Props = {
     currentColor: string;
     iconColor?: string;
     opacity?: string;
-    visible?: boolean;
+    style?: ViewStyle;
 };
 
-const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity, visible }: Props): React.ReactElement => {
+const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity, style }: Props): React.ReactElement => {
 
     const opaqueColor = withOpacity(iconColor || WHITE, 'CC' || opacity);
 
@@ -24,7 +24,7 @@ const ShuffleButton = ({ currentColor, onSwitchColor, iconColor, opacity, visibl
     }, [currentColor, onSwitchColor]);
 
     return (
-        <TouchableOpacity onPress={switchColor} style={{ ...!visible ? { display: 'none' } : {} }}>
+        <TouchableOpacity onPress={switchColor} style={style}>
             <FontAwesomeIcon icon={faShuffle} color={opaqueColor} size={22} />
         </TouchableOpacity>
     );

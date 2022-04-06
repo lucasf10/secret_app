@@ -10,9 +10,10 @@ const style = StyleSheet.create({
     },
     rightBottom: {
         flexDirection: 'row',
-        width: 60,
         alignItems: 'center',
-        justifyContent: 'space-between',
+    },
+    shuffleButton: {
+        marginLeft: 20,
     },
 });
 

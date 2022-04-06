@@ -7,7 +7,6 @@ import { LoggedStackParamList } from '../../navigation/LoggedStack';
 import styles from './style';
 import { State } from '../../types/common';
 import Post from '../../components/organisms/Post';
-import { BLACK } from '../../utils/colors';
 import { actions as postActions } from '../../actions/post';
 import { Comment } from '../../types/comment';
 import CloseButton from '../../components/atoms/CloseButton';

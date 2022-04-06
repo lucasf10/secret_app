@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import CameraButton from '../../atoms/CameraButton';
 import ChangeColorButton from '../../atoms/ChangeColorButton';
+import RemoveImageButton from '../../atoms/RemoveImageButton';
 import ShuffleButton from '../../atoms/ShuffleButton';
 import CameraOptionsModal from '../CameraOptionsModal';
 import styles from './style';
@@ -17,8 +18,9 @@ type Props = {
     onClickCameraButton: () => void;
     onCloseModal: () => void;
     onSelectGallery: () => void;
-    onRemovePicture?: () => void;
+    onRemovePicture: () => void;
     hideShuffleButton: boolean;
+    isImageSelected: boolean;
 };
 
 const CreatePostFooter = (props: Props): React.ReactElement => {
@@ -34,30 +36,35 @@ const CreatePostFooter = (props: Props): React.ReactElement => {
         onSelectGallery,
         onRemovePicture,
         hideShuffleButton,
+        isImageSelected,
     } = props;
 
     return (
         <View style={styles.view}>
-            <CameraButton onOpenCamera={onClickCameraButton} iconColor={currentTextColor} />
+            {!isImageSelected
+                ? <CameraButton onOpenCamera={onClickCameraButton} iconColor={currentTextColor} />
+                : <RemoveImageButton onRemoveImage={onRemovePicture} />
+            }
             <View style={styles.rightBottom}>
                 <ChangeColorButton
                     currentColor={currentTextColor}
                     onChangeColor={onSwitchTextColor}
                     iconColor={currentTextColor}
                 />
-                <ShuffleButton
-                    onSwitchColor={onSwitchBGColor}
-                    currentColor={currentBGColor}
-                    visible={!hideShuffleButton}
-                    iconColor={currentTextColor}
-                />
+                {!hideShuffleButton && (
+                    <ShuffleButton
+                        onSwitchColor={onSwitchBGColor}
+                        currentColor={currentBGColor}
+                        iconColor={currentTextColor}
+                        style={styles.shuffleButton}
+                    />
+                )}
             </View>
             <CameraOptionsModal
                 visible={modalVisible}
                 onClose={onCloseModal}
                 onSelectCamera={onSelectCamera}
                 onSelectGallery={onSelectGallery}
-                onRemovePicture={onRemovePicture}
             />
         </View>
     );
