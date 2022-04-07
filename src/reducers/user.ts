@@ -13,6 +13,7 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
     case types.SIGN_OUT:
     case types.SIGN_UP:
     case types.GET_LOCATION:
+    case types.GET_FIREBASE_TOKEN:
       return {
         ...state,
         isFetching: true,
@@ -22,6 +23,7 @@ const userState = (state = INITIAL_STATE, action: Action): UserState => {
     case types.SET_ACCESS_TOKEN:
     case types.SET_LOCATION:
     case types.SET_CITY:
+    case types.SET_FIREBASE_TOKEN:
       return {
         ...state,
         ...action.payload,

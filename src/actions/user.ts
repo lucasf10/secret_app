@@ -4,6 +4,8 @@ import { User, UserForm } from '../types/user';
 const name = 'USER/';
 
 export const types = {
+  GET_FIREBASE_TOKEN: `${name}/GET_FIREBASE_TOKEN`,
+  SET_FIREBASE_TOKEN: `${name}/SET_FIREBASE_TOKEN`,
   SET_ACCESS_TOKEN: `${name}/SET_ACCESS_TOKEN`,
   SET_USER_DATA: `${name}/SET_USER_DATA`,
   PERFORM_AUTH: `${name}/PERFORM_AUTH`,
@@ -35,6 +37,14 @@ export const actions = {
   setLocation: (location: { coordinates: [number, number] }): Action => ({
     type: types.SET_LOCATION,
     payload: { location },
+  }),
+  getFirebaseToken: (userId: string, token?: string): Action => ({
+    type: types.GET_FIREBASE_TOKEN,
+    payload: { userId, token },
+  }),
+  setFirebaseToken: (firebaseToken: string): Action => ({
+    type: types.SET_FIREBASE_TOKEN,
+    payload: { firebaseToken },
   }),
   setCity: (city: string ): Action => ({
     type: types.SET_LOCATION,

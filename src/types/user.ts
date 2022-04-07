@@ -8,10 +8,11 @@ export interface UserState {
     coordinates: [number, number]
   }
   city?: string;
+  firebaseToken?: string;
 }
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
   email: string;
   likedPosts: string[];

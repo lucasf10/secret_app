@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import messaging from '@react-native-firebase/messaging';
 import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -10,6 +11,7 @@ import { TOAST_DURATION } from './utils/constants';
 import { store, persistor } from './store';
 import api from './services/api';
 import { actions as userActions } from './actions/user';
+import { requestMessagePermission } from './utils/functions';
 
 const App = () => {
   const { dispatch } = store;
@@ -18,6 +20,15 @@ const App = () => {
 
   useEffect(() => {
     dispatch(userActions.getLocation());
+
+    requestMessagePermission();
+    messaging().onTokenRefresh((token) => {
+      const isLoggedIn = store.getState().user.isLoggedIn;
+      const userId = isLoggedIn && store.getState().user.user?.id;
+      const currentFirebaseToken = store.getState().user.firebaseToken;
+      if (isLoggedIn && userId && token !== currentFirebaseToken)
+        dispatch(userActions.getFirebaseToken(userId, token));
+    });
   }, [dispatch]);
 
   store.subscribe(() => {

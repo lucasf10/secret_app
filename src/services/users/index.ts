@@ -9,3 +9,9 @@ export const performAuth = (
 
 export const performSignUp = (payload: UserForm): Promise<AxiosResponse> =>
   api.post('auth/register', payload);
+
+export const setUserFirebaseToken = (
+  userId: string,
+  firebaseToken: string,
+): Promise<AxiosResponse> =>
+  api.post(`users/${userId}/set_firebase_token`, { firebaseToken });

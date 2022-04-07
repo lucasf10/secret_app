@@ -1,5 +1,6 @@
 import GeoLocation from '@react-native-community/geolocation';
 import { PermissionsAndroid } from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import Geocoder from '@timwangdev/react-native-geocoder';
 import { ObjectSchema } from 'yup';
 import yupToObject from 'yup-to-object';
@@ -65,4 +66,19 @@ export const requestCameraPermission = async () => {
   } catch (err) {
     return false;
   }
+};
+
+export const requestMessagePermission = async (): Promise<void> => {
+  const authorizationStatus = await messaging().requestPermission();
+
+  if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED)
+    console.log('User has notification permissions enabled.');
+  else if (authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL)
+    console.log('User has provisional notification permissions.');
+  else
+    console.log('User has notification permissions disabled');
+};
+
+export const getFirebaseToken = async () =>  {
+  return await messaging().getToken();
 };
