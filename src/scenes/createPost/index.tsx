@@ -14,6 +14,7 @@ import { actions as toastActions } from '../../actions/toast';
 import { B64_PREFIX, CAMERA_OPTIONS, IMAGE_PICKER_OPTIONS } from '../../utils/constants';
 import { useDispatch } from 'react-redux';
 import { requestCameraPermission } from '../../utils/functions';
+import Overlay from '../../components/atoms/Overlay';
 
 export type CreatePostProp = NativeStackNavigationProp<LoggedStackParamList, 'CreatePost'>;
 
@@ -66,6 +67,7 @@ const CreatePostScreen = ({ navigation }: Props): React.ReactElement => {
                 uri:`${B64_PREFIX}${image?.base64}`,
             }}
         >
+            {image?.base64 && <Overlay />}
             <View style={{
                 ...styles.view,
                 ...!(image?.base64) ? { backgroundColor: currentBGColor } : {},

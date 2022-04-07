@@ -7,6 +7,7 @@ import PostContent from '../../atoms/PostContent';
 import { B64_PREFIX } from '../../../utils/constants';
 import { Post as PostType } from '../../../types/post';
 import { BLACK } from '../../../utils/colors';
+import Overlay from '../../atoms/Overlay';
 
 type Props = {
     onLiked: () => void;
@@ -29,6 +30,7 @@ const Post = (props: Props): React.ReactElement => {
     return (
         <ImageBackground source={{ uri: `${B64_PREFIX}${post?.backgroundImage}` }} resizeMode="cover" >
             <View style={viewStyle}>
+                {post?.backgroundImage && <Overlay />}
                 <PostContent text={post?.text} color={post?.textColor} />
                 <PostFooter
                     onLiked={onLiked}
